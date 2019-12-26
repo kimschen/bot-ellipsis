@@ -46,7 +46,7 @@ client.on('ready', () => {
     client.user.setActivity('/help', {type: 'LISTENING'});
     console.log(`Logged in as ${client.user.tag}!`);  
   
-    // const channel = client.channels.find(ch => ch.name === 'hisako🌐');
+    // const channel = client.channels.find(ch => ch.name === 'ellipsis🌐');
     // channel.send(":star: Command Update :star: \nAll sticker commands are now using prefix `/` \ne.g. `/ic1212` | `/bdhello`");
 });
 
@@ -166,11 +166,11 @@ function processCommand(receivedMessage) {
               const allListEmbed = new Discord.RichEmbed()
               .setColor('#fafafa')
               .attachFile('img_misc/bucket.png')
-              .setAuthor("Hisako's Personal Bucket", 'attachment://bucket.png')
+              .setAuthor("Ellipsis's Personal Bucket", 'attachment://bucket.png')
               .setDescription('A bucket list to keep some notes for you')
               .addField("❯ Page 1", entryWithId.slice(0, 10).join("\n"), true)
               .setTimestamp()
-              .setFooter('Hisako');
+              .setFooter('Ellipsis');
 
               receivedMessage.channel.send(allListEmbed);
 
@@ -197,11 +197,11 @@ function processCommand(receivedMessage) {
                 const allListEmbed = new Discord.RichEmbed()
                 .setColor('#fafafa')
                 .attachFile('img_misc/bucket.png')
-                .setAuthor("Hisako's Personal Bucket", 'attachment://bucket.png')
+                .setAuthor("Ellipsis's Personal Bucket", 'attachment://bucket.png')
                 .setDescription('A bucket list to keep some notes for you')
                 .addField("❯ Page 2", entryWithId.slice(10).join("\n"), true)
                 .setTimestamp()
-                .setFooter('Hisako');
+                .setFooter('Ellipsis');
 
                 receivedMessage.channel.send(allListEmbed);
 
@@ -214,11 +214,11 @@ function processCommand(receivedMessage) {
         const listEmbed = new Discord.RichEmbed()
         .setColor('#fafafa')
         .attachFile('img_misc/bucket.png')
-        .setAuthor("Hisako's Personal Bucket", 'attachment://bucket.png')
+        .setAuthor("Ellipsis's Personal Bucket", 'attachment://bucket.png')
         .setDescription('Command Prefix : `/`')
         .addField('❯ Personal Bucket List', "`list add` | `list all`", true)
         .setTimestamp()
-        .setFooter('Hisako');
+        .setFooter('Ellipsis');
 
         receivedMessage.channel.send(listEmbed);
     }
@@ -414,10 +414,10 @@ client.on('message', msg => {
         
         const helpCommandEmbed = new Discord.RichEmbed()
         .setColor('#fbb3ff')
-        .attachFile('img_misc/hisako.jpg')
-        .setAuthor("Hi, I'm Hisako, how can I help you?", 'attachment://hisako.jpg')
+        // .attachFile('img_misc/hisako.jpg')
+        .setAuthor("Hi, I'm Ellipsis, how can I help you?")
         .setDescription('Command Prefix : `/`')
-        .setThumbnail('attachment://hisako.jpg')
+        // .setThumbnail('attachment://hisako.jpg')
         .addField('❯ B.Duck Stickers', '`bduck`', true)
         .addField('❯ Intense Cat Stickers', '`icat`', true)
         .addField('❯ HELLDIVERS™', '`hd`', true)
@@ -425,7 +425,7 @@ client.on('message', msg => {
         .addField('❯ Personal bucket list', '`list`', true)
         .addField('❯ Miscellaneous', '`misc`', true)
         .setTimestamp()
-        .setFooter('Hisako');
+        .setFooter('Ellipsis');
 
         msg.channel.send(helpCommandEmbed);
     }
@@ -449,7 +449,7 @@ client.on('message', msg => {
         .setThumbnail('https://cdn.streamelements.com/uploads/33f405cc-22ce-45a8-9f92-a01efedb5b62.gif')
         .addField('❯ Available stickers', commandList.join(" "), true)
         .setTimestamp()
-        .setFooter('Hisako');
+        .setFooter('Ellipsis');
     
         msg.channel.send(bduckEmbed);
    
@@ -470,12 +470,12 @@ client.on('message', msg => {
         
         const miscEmbed = new Discord.RichEmbed()
         .setColor('#fafafa')
-        .attachFile('img_misc/hisako.jpg')
-        .setAuthor('MISC', 'attachment://hisako.jpg')
+        // .attachFile('img_misc/hisako.jpg')
+        // .setAuthor('MISC', 'attachment://hisako.jpg')
         .setDescription('Here are some MISC commands')
         .addField('❯ Miscellaneous', commandList.join(" "), true)
         .setTimestamp()
-        .setFooter('Hisako');
+        .setFooter('Ellipsis');
 
         msg.channel.send(miscEmbed);
     }
@@ -523,7 +523,7 @@ client.on('message', msg => {
         .addField('❯ Special Stratagems', special.join(" "), true)
         .addField('❯ Transmitter Objective Key','`trans`',true)
         .setTimestamp()
-        .setFooter('Hisako');
+        .setFooter('Ellipsis');
 
         msg.channel.send(helldiversEmbed);
     }
@@ -548,12 +548,12 @@ client.on('message', msg => {
         const helpCommandEmbed = new Discord.RichEmbed()
         .setColor('#6583fc')
         .attachFile('img_misc/portal_knights.png')
-        .setAuthor("Portal Knights", 'attachment://hisako.jpg')
+        .setAuthor("Portal Knights")
         .setDescription('Command Prefix : `pk`')
         .setThumbnail('attachment://portal_knights.png')
         .addField('❯ Wiki', '`weapons` | `armor` | `blocks` | `ingredients` | `portal` | `crafting` | `tools` | `skills` | `consume` | `recipes` | `pets` | `events` | `islands` | `misc` | `bosses`', true)
         .setTimestamp()
-        .setFooter('Hisako');
+        .setFooter('Ellipsis');
 
         msg.channel.send(helpCommandEmbed);
     }
@@ -617,7 +617,7 @@ client.on('message', msg => {
         .setThumbnail('attachment://icevil1.gif')
         .addField('❯ Available stickers', commandList.join(" "), true)
         .setTimestamp()
-        .setFooter('Hisako');
+        .setFooter('Ellipsis');
     
         msg.channel.send(iCatEmbed);
    
@@ -642,7 +642,7 @@ client.on('message', msg => {
 
 // Prevent from idling, send request to url every 1 minutes
 setInterval(function() {
-    https.get("https://rokusinao.glitch.me");
+    https.get("https://ellipsis.glitch.me");
     console.log("ping!");
     
     var date = new Date();
