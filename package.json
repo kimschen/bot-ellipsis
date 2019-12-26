@@ -1,27 +1,22 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "hello-express",
-  "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
+  "name": "ellipsis-dev",
+  "version": "1.0.0",
+  "description": "ellipsis-dev discord bot",
   "main": "server.js",
+  "engines": {
+    "node": "10.10.0"
+  },
   "scripts": {
     "start": "node server.js"
   },
+  "author": "kimwsc",
+  "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
-  },
-  "engines": {
-    "node": "8.x"
-  },
-  "repository": {
-    "url": "https://glitch.com/edit/#!/hello-express"
-  },
-  "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
+    "contentful": "^7.11.3",
+    "contentful-management": "^5.12.0",
+    "discord.js": "^11.5.1",
+    "express": "^4.17.1",
+    "express-glitch-keepalive": "^0.2.0",
+    "flat": "^5.0.0"
+  }
 }
