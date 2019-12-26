@@ -1,7 +1,7 @@
 {
-  "name": "ellipsis-dev",
+  "name": "u-b",
   "version": "1.0.0",
-  "description": "ellipsis-dev discord bot",
+  "description": "unique-bot",
   "main": "server.js",
   "engines": {
     "node": "10.10.0"
@@ -9,14 +9,16 @@
   "scripts": {
     "start": "node server.js"
   },
-  "author": "kimwsc",
+  "author": "sphere",
   "license": "ISC",
   "dependencies": {
-    "contentful": "^7.11.3",
-    "contentful-management": "^5.12.0",
+    "contentful": "^7.10.0",
+    "contentful-management": "^5.11.2",
     "discord.js": "^11.5.1",
     "express": "^4.17.1",
     "express-glitch-keepalive": "^0.2.0",
-    "flat": "^5.0.0"
+    "firebase-admin": "^8.6.0",
+    "firebase-tools": "^7.4.0",
+    "flat": "^4.1.0"
   }
 }

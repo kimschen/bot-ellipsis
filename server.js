@@ -642,7 +642,7 @@ client.on('message', msg => {
 
 // Prevent from idling, send request to url every 1 minutes
 setInterval(function() {
-    https.get("https://ellipsis.glitch.me");
+    https.get("https://rokusinao.glitch.me");
     console.log("ping!");
     
     var date = new Date();

@@ -1,0 +1,112 @@
+{
+    "ck"       : "ck!",
+    "ok"        : "ok bye",
+    "kimsphere" : "My mother, she's a curious 😼 from hell!",
+    "andylam"   : "A friendly 15 years old pro cyclist from HK!",
+    "asarind"   : "A super fan of B.Duck, pro and supportive teammate!",
+    "nerokecq"  : "A fan of Crash Bandicoot, `Wait!` was his favorite command in Helldivers!",
+    "special":
+    {
+        "reinforce" : "Reinforce | `增援`\n:arrow_up: :arrow_down: :arrow_right: :arrow_left: :arrow_up:",
+        "sos" : "Emergency Beacon | `求救信標`\n:arrow_up: :arrow_down: :arrow_right: :arrow_up:",
+        "hellbomb" : "NUX-223 Hellbomb | `地獄火`\n:arrow_up: :arrow_left: :arrow_right: :arrow_down: :arrow_up: :arrow_down:",
+        "sniffer" : "ME-1 Sniffer Metal Detector | `偵查犬`\n:arrow_down: :arrow_down: :arrow_right: :arrow_up:"
+    },
+    "offensive" :
+    {
+        "airstrike": "Heavy Airstrike | `密集空襲`\n:arrow_right: :arrow_up: :arrow_down: :arrow_right: :arrow_left:",
+        "closeair" : "Close Air Support | `近接空中支援`\n:arrow_right: :arrow_right: :arrow_down: :arrow_left:",
+        "divebomb": "Vindicator Dive Bomb | `辯護者`\n:arrow_right: :arrow_right: :arrow_right:",
+        "hsrun" : "Heavy Strafing Run | `重機槍掃射`\n:arrow_right: :arrow_right: :arrow_down: :arrow_up:",
+        "incendiary" : "Incendiary Bombs | `火牆`\n:arrow_right: :arrow_up: :arrow_left: :arrow_right:",
+        "missle" : "Missle Barrage | `火箭彈幕`\n:arrow_right: :arrow_down: :arrow_down: :arrow_down: :arrow_left: :arrow_down:",
+        "laser" : "Orbital Laser Strike | `外太空軌道雷射炮攻擊`\n:arrow_right: :arrow_up: :arrow_left: :arrow_up: :arrow_right: :arrow_left:",
+        "railcannon" : "Railcannon Strike | `軌道炮攻擊`\n:arrow_right: :arrow_down: :arrow_up: :arrow_down: :arrow_left:",
+        "nuke" : "Shredder Missile Strike `撕裂者`\n:arrow_right: :arrow_left: :arrow_right: :arrow_left: :arrow_down: :arrow_down: :arrow_right:",
+        "precision" : "Sledge Precision Artillery | `精確炮轟`\n:arrow_right: :arrow_up: :arrow_left: :arrow_up: :arrow_down::arrow_right:",
+        "staticfield" : "Static Field Conductors | `靜電防護導體`\n:arrow_right: :arrow_up: :arrow_left: :arrow_down:",
+        "srun" : "Strafing Run | `機槍掃射`\n:arrow_right: :arrow_right: :arrow_up:",
+        "thunderer" : "Thunderer Barrage | `轟鳴者`\n:arrow_right: :arrow_down: :arrow_up: :arrow_up: :arrow_left: :arrow_down:"
+    },
+    "defensive" :
+    {
+        "at47" : "AT-47 Anti-Tank Emplacement | `反坦克炮台`",
+        "barrier" : "Anti-Personnel Barrier | `反步兵屏障`",
+        "beacon" : "Distractor Beacon | `干擾者信標`",
+        "drone" : "Humblebee UAV drone | `蜜蜂`",
+        "mines" : "Airdropped Anti-Personnel Mines | `空投反坦克地雷`",
+        "launcherturret" : "A/GL-8 Launcher Turret | `發射器炮台`",
+        "minigunturret" : "A/MG-11 Minigun Turret | `迷你機槍炮炮台`",
+        "railcannonturret" : "A/RX-34 Railcannon Turret | `軌道炮炮台`",
+        "smokeround" : "Thunderer Smoke Round | `煙霧炮擊`",
+        "stunmines" : "Airdropped Stun Mines | `空投暈眩地雷`",
+        "tesla" : "A/AC-6 Tesla Tower | `特斯拉塔`"
+    },
+    "objective" :
+    {
+        "trans_1" : "\n10 button presses",
+        "trans_2" : "\n:arrow_up: :arrow_up: :arrow_down: :arrow_left: :arrow_left: :arrow_up: :arrow_up: :arrow_right: :arrow_up:",
+        "trans_3" : "\n25 button presses",
+        "trans_4" : "\n:arrow_down: :arrow_down: :arrow_up: :arrow_down: :arrow_down: :arrow_down: :arrow_left: :arrow_down: :arrow_up: :arrow_down: :arrow_down:"
+    },
+    "supply" :
+    {
+          "ammo" : "Ammunition / Resupply | `弹药 / 補給`",
+          "angel" : "AD-289 Angel | `天使`",
+          "apc" : "M5 APC | `車`",
+          "bastion" : "TD-110 Bastion | `堡壘`",
+          "bike" : "MC-109 Hammer Motorcycle | `神鎚摩托車`",
+          "commando" : "MLS-4X Commando | `突擊兵`",
+          "demolisher" : "REC-6 Demolisher | `爆破者`",
+          "dumdum" : "AC-22 Dum-Dum | `達姆`",
+          "eat17" : "EAT-17 | `拋棄式反戰車火箭`",
+          "exo44" : "EXO-44 Walker Exosuit | `步行者`",
+          "exo48" : "EXO-48 Obsidian Exosuit | `黑曜石`",
+          "exo51" : "EXO-51 Lumberer Exosuit | `重步者`",
+          "flam40" : "FLAM-40 Incinerator | `焚化爐`",
+          "guarddog" : "AD-334 Guard Dog | `護衛犬`",
+          "hav" : "M5-32 HAV | `大炮車`",
+          "las98" : "LAS-98 Laser Cannon | `雷射大炮`",
+          "lift850" : "LIFT-850 Jump Pack | `噴射背包`",
+          "mg94" : "MG-94 Machine Gun | `機槍`",
+          "mgx42" : "MGX-42 Machine Gun | `即棄機槍`",
+          "obliterator" : "Obliterator Grenade Launcher | `消滅者`",
+          "rep80" : "REP-80 | `維修工具`",
+          "resupply" : "Resupply Pack | `補充物資包`",
+          "recoilless" : "RL-112 Recoilless Rifle | `無後座力步槍`",
+          "rumbler" : "M-25 Rumbler | `雷鳴者`",
+          "sh20" : "SH-20 Shield Generator Pack | `防護罩生成包`",
+          "sh32" : "SH-32 Directional Kinetic Shield | `定向動力護罩`",
+          "tox13" : "TOX-13 Avenger | `復仇者`"
+    },
+    "weapon" :
+    {
+          "shotgun" : "電弧散彈槍",
+          "thrower" : "電弧發射器",
+          "breaker" : "破裂者",
+          "camper" : "野營者",
+          "constitution" : "憲法",
+          "defender" : "防衛者",
+          "double_freedom" : "雙重自由",
+          "gunslinger" : "神槍手",
+          "justice" : "正義",
+          "knight" : "騎士",
+          "liberator" : "解放者",
+          "ninja" : "忍者",
+          "paragon" : "典範",
+          "patriot" : "愛國者",
+          "peacemaker" : "和平製造者",
+          "punisher" : "制裁者",
+          "pyro" : "烈焰",
+          "railgun" : "軌道槍",
+          "scorcher" : "焦土",
+          "scythe" : "長柄鐮",
+          "sickle" : "鐮刀",
+          "singe" : "焦痕",
+          "stalwart" : "盟友",
+          "suppressor" : "抑制者",
+          "tanto" : "短刀",
+          "trident" : "三叉戟"
+    }
+
+}
