@@ -43,10 +43,10 @@ const contentfulClient = contentful.createClient({
 
 client.on('ready', () => {
   
-    client.user.setActivity('/help', {type: 'LISTENING'});
+    client.user.setActivity('...help', {type: 'LISTENING'});
     console.log(`Logged in as ${client.user.tag}!`);  
   
-    // const channel = client.channels.find(ch => ch.name === 'ellipsis-dev');
+    // const channel = client.channels.find(ch => ch.name === 'ellipsis');
 });
 
 client.on('message', (receivedMessage) => {
@@ -74,7 +74,7 @@ client.on('message', (msg) => {
         return
     }
     
-    if (msg.content.startsWith("/")) {
+    if (msg.content.startsWith("...hd ")) {
       
       processImageCommand(msg);
     
@@ -82,7 +82,7 @@ client.on('message', (msg) => {
     
     function processImageCommand(msg) {
       
-      let content = msg.content.toLowerCase().substr(1);      
+      let content = msg.content.toLowerCase().substr(6);      
       let hdWeaponImagePath  = __dirname +"/img_weapon/"+content+".png";
       let hdDefensiveImagePath = __dirname +"/img_stratagem/defensive/"+content+".png";
       let hdOffensiveImagePath = __dirname +"/img_stratagem/offensive/"+content+".png";
@@ -135,7 +135,7 @@ client.on('message', msg => {
     }
 
     var msgContent  = msg.content.toLowerCase();
-    var prefix = "/";
+    var prefix = "...";
     var commandList = [];
     var cmd = '';
   
@@ -144,8 +144,8 @@ client.on('message', msg => {
         const helpCommandEmbed = new Discord.RichEmbed()
         .setColor('#fbb3ff')
         // .attachFile('img_misc/hisako.jpg')
-        .setAuthor("Hi, I'm Ellipsis, how can I help you?")
-        .setDescription('Command Prefix : `/`')
+        .setAuthor("Hi, I'm Ellipsis, which game info you're looking for?")
+        .setDescription('Command Prefix : `...`')
         // .setThumbnail('attachment://hisako.jpg')
         .addField('❯ HELLDIVERS™', '`hd`', true)
         .addField('❯ Portal Knights Wiki', '`pk`', true)
@@ -189,7 +189,7 @@ client.on('message', msg => {
         const helldiversEmbed = new Discord.RichEmbed()
         .setColor('#d4d4d4')
         .setAuthor('HELLDIVERS™', 'https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/','https://helldivers.gamepedia.com/Stratagems')
-        .setDescription('Command Prefix : `/`')
+        .setDescription('Command Prefix : `...hd`')
         .setThumbnail('https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/')
         .addField('❯ Offensive Stratagems', offensive.join(" "), true)
         .addField('❯ Defensive Stratagems', defensive.join(" "), true)
@@ -224,7 +224,7 @@ client.on('message', msg => {
         .setColor('#6583fc')
         .attachFile('img_misc/portal_knights.png')
         .setAuthor("Portal Knights")
-        .setDescription('Command Prefix : `pk`')
+        .setDescription('Command Prefix : `...pk`')
         .setThumbnail('attachment://portal_knights.png')
         .addField('❯ Wiki', '`weapons` | `armor` | `blocks` | `ingredients` | `portal` | `crafting` | `tools` | `skills` | `consume` | `recipes` | `pets` | `events` | `islands` | `misc` | `bosses`', true)
         .setTimestamp()
@@ -235,44 +235,44 @@ client.on('message', msg => {
 
     switch (msgContent) {
 
-        case "pk weapons"     : msg.channel.send("https://portalknights.gamepedia.com/Weapons");
+        case "...pk weapons"     : msg.channel.send("https://portalknights.gamepedia.com/Weapons");
         break;
-        case "pk armor"       : msg.channel.send("https://portalknights.gamepedia.com/Armor");
+        case "...pk armor"       : msg.channel.send("https://portalknights.gamepedia.com/Armor");
         break;
-        case "pk blocks"      : msg.channel.send("https://portalknights.gamepedia.com/Blocks");
+        case "...pk blocks"      : msg.channel.send("https://portalknights.gamepedia.com/Blocks");
         break;
-        case "pk ingredients" : msg.channel.send("https://portalknights.gamepedia.com/Ingredients");
+        case "...pk ingredients" : msg.channel.send("https://portalknights.gamepedia.com/Ingredients");
         break;
-        case "pk portal"      : msg.channel.send("https://portalknights.gamepedia.com/Portal_Stones");
+        case "...pk portal"      : msg.channel.send("https://portalknights.gamepedia.com/Portal_Stones");
         break;
-        case "pk crafting"    : msg.channel.send("https://portalknights.gamepedia.com/Crafting_Stations");
+        case "...pk crafting"    : msg.channel.send("https://portalknights.gamepedia.com/Crafting_Stations");
         break;
-        case "pk tools"       : msg.channel.send("https://portalknights.gamepedia.com/Tools");
+        case "...pk tools"       : msg.channel.send("https://portalknights.gamepedia.com/Tools");
         break;
-        case "pk skills"      : msg.channel.send("https://portalknights.gamepedia.com/Skills");
+        case "...pk skills"      : msg.channel.send("https://portalknights.gamepedia.com/Skills");
         break;
-        case "pk consume"     : msg.channel.send("https://portalknights.gamepedia.com/Consumables");
+        case "...pk consume"     : msg.channel.send("https://portalknights.gamepedia.com/Consumables");
         break;
-        case "pk misc"        : msg.channel.send("https://portalknights.gamepedia.com/Misc");
+        case "...pk misc"        : msg.channel.send("https://portalknights.gamepedia.com/Misc");
         break;
-        case "pk recipes"     : msg.channel.send("https://portalknights.gamepedia.com/Recipes");
+        case "...pk recipes"     : msg.channel.send("https://portalknights.gamepedia.com/Recipes");
         break;
-        case "pk pets"        : msg.channel.send("https://portalknights.gamepedia.com/Pets");
+        case "...pk pets"        : msg.channel.send("https://portalknights.gamepedia.com/Pets");
         break;
-        case "pk events"      : msg.channel.send("https://portalknights.gamepedia.com/Events");
+        case "...pk events"      : msg.channel.send("https://portalknights.gamepedia.com/Events");
         break;
-        case "pk islands"     : msg.channel.send("https://portalknights.gamepedia.com/Islands");
+        case "...pk islands"     : msg.channel.send("https://portalknights.gamepedia.com/Islands");
         break;
-        case "pk npc"         : msg.channel.send("https://portalknights.gamepedia.com/NPCs");
+        case "...pk npc"         : msg.channel.send("https://portalknights.gamepedia.com/NPCs");
         break;
-        case "pk bosses"      : msg.channel.send("https://portalknights.gamepedia.com/Bosses");
+        case "...pk bosses"      : msg.channel.send("https://portalknights.gamepedia.com/Bosses");
         break;
     }
 });
 
 // Prevent from idling, send request to url every 1 minutes
 setInterval(function() {
-    https.get("https://ellipsis.glitch.me");
+    https.get("https://ellipsis-dev.glitch.me");
     console.log("ping!");
 
 }, 60 * 1000);

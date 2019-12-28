@@ -66,8 +66,8 @@
       },
       "weapon" :
       {
-          "shotgun" : "arcshotgun",
-          "thrower" : "arcthrower",
+          "arcshotgun" : "arcshotgun",
+          "arcthrower" : "arcthrower",
           "breaker" : "breaker",
           "camper" : "camper",
           "constitution" : "constitution",
@@ -101,6 +101,6 @@
           "sniffer" : "sniffer"
       },
     
-      "trans" : "trans"
+      "trans" : "hd trans"
     }
 }
