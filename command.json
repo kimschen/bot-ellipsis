@@ -1,8 +1,8 @@
 {
     "help" : "help",
-    "help_helldivers" : "hd",
-    "help_portalknights" : "pk",
-    "hd" : {
+    "cmd_helldivers" : "hd",
+    "cmd_portal_knights" : "pk",
+    "helldivers" : {
       "offensive" : 
       {
           "airstrike": "airstrike",
@@ -102,5 +102,20 @@
       },
     
       "trans" : "hd trans"
+    },
+    "portal_knights" : {
+      "class" : {
+        "warrior" : "warrior",
+        "ranger" : "ranger",
+        "mage" : "mage",
+        "rogue" : "rogue"
+      },
+      "type" : {
+        "weapon" : "weapon",
+        "armor" : "armor"
+      }
     }
+    
+  
+
 }

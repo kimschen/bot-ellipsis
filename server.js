@@ -8,13 +8,17 @@ const client      = new Discord.Client();
 const keepalive   = require('express-glitch-keepalive');
 const flatten     = require('flat');
 const contentful  = require('contentful-management');
-
 let https       = require("https");
-let jsonMessage = fs.readFileSync('message.json');
-let jsonCommand = fs.readFileSync('command.json');
 
-let message     = JSON.parse(jsonMessage);
-let command     = JSON.parse(jsonCommand);
+// Read & Parse json files
+let jsonMessage       = fs.readFileSync('message.json');
+let jsonCommand       = fs.readFileSync('command.json');
+let jsonPortalKnights = fs.readFileSync('portal_knights.json');
+
+let message       = JSON.parse(jsonMessage);
+let command       = JSON.parse(jsonCommand);
+let portalKnights = JSON.parse(jsonPortalKnights);
+
 let flattenCmd  = flatten({command});
 
 keepAlive.use(keepalive);
@@ -49,23 +53,78 @@ client.on('ready', () => {
     // const channel = client.channels.find(ch => ch.name === 'ellipsis');
 });
 
-client.on('message', (receivedMessage) => {
+client.on('message', (receivedCommand) => {
   
     // Prevent bot from responding to its own messages
-    if (receivedMessage.author == client.user) {
+    if (receivedCommand.author == client.user) {
         return
     }
   
-    function processCommand(receivedMessage) {
-        let fullCommand = receivedMessage.content.substr(5); // Remove the leading exclamation mark
+    if (receivedCommand.content.startsWith("...")) {
+        processCommand(receivedCommand);
+    }
+  
+    function processCommand(receivedCommand) {
+        
+        let fullCommand = receivedCommand.content.toLowerCase().substr(3) // Remove the leading prefix mark
         let splitCommand = fullCommand.split(" "); // Split the message up in to pieces for each space
-        let primaryCommand = splitCommand[1]; // The first word directly after the exclamation is the command
-        let cmdArguments = splitCommand.slice(2).join(" "); // All other words are cmdArguments/parameters/options for the command
+        let primaryCommand = splitCommand[1]; // The first word after the prefix
+        let secondaryCommand = splitCommand[2]; // The second word after the primary command
+        let cmdArguments = splitCommand.slice(3).join(" "); // All other words are cmdArguments/parameters/options for the command
 
-        console.log("Command received: " + primaryCommand);
-        console.log("Arguments: " + cmdArguments); // There may not be any cmdArguments
+        console.log(`Full Command: ${fullCommand}`);
+        console.log(`Primary Command: ${primaryCommand}`);
+        console.log(`Secondary Command: ${secondaryCommand}`);
+        console.log(`Arguments: ${cmdArguments}`); // There may not be any cmdArguments
+                    
+        if (primaryCommand == command.cmd_portal_knights) {
+          if (secondaryCommand == command.portal_knights.type.weapon) {
+            if (cmdArguments == command.portal_knights.class.warrior) {
+
+              let data = portalKnights.weapon.warrior;
+              let data2 = portalKnights.weapon_test.warrior;
+              
+              var portalKnightsWeapon = new Discord.RichEmbed(data)
+              
+              receivedCommand.channel.send({embed : portalKnightsWeapon}).then(embedMessage => {
+                embedMessage.react('➡️');
+                embedMessage.react('⬅️');
+                
+                const filter = (reaction , user) => {
+                  return ['⬅️', '➡️'].includes(reaction.emoji.name) && user.id === receivedCommand.author.id;
+                };
+                                
+                const collector = embedMessage.createReactionCollector(filter, { time: 60000 }); // 1 min
+                      
+                collector.on('collect', reaction => {
+                           
+                  if (reaction.emoji.name == '➡️') {
+                                        
+                    // Next page button
+                    var portalKnightsWeapon = new Discord.RichEmbed(data2);
+                    embedMessage.edit(portalKnightsWeapon)
+                  
+                  } else {
+                    // Previous page button
+                    var portalKnightsWeapon = new Discord.RichEmbed(data);
+                    embedMessage.edit(portalKnightsWeapon)
+                  }
+                  })                
+              })
+              .catch(err => console.error(err));
+            }
+          }
+        }
 
     }
+});
+
+client.on('message', msg => {
+  
+  if ( msg.content == "what should we do now?") {
+    msg.channel.send("Sleep!");
+  }
+  
 });
 
 client.on('message', (msg) => {
@@ -93,27 +152,27 @@ client.on('message', (msg) => {
         
         // HD Weapon Image
         if (fs.existsSync(hdWeaponImagePath)) {
-          msg.channel.send(message.weapon[content], {files: [hdWeaponImagePath]});
+          msg.channel.send(message.helldivers.weapon[content], {files: [hdWeaponImagePath]});
         }
 
         // HD Defensive Stratagem Image
         if (fs.existsSync(hdDefensiveImagePath)) {
-          msg.channel.send(message.defensive[content], {files: [hdDefensiveImagePath]});
+          msg.channel.send(message.helldivers.defensive[content], {files: [hdDefensiveImagePath]});
         }
         
         // HD Offensive Stratagem Image
         if (fs.existsSync(hdOffensiveImagePath)) {
-          msg.channel.send(message.offensive[content], {files: [hdOffensiveImagePath]});
+          msg.channel.send(message.helldivers.offensive[content], {files: [hdOffensiveImagePath]});
         }
         
         // HD Special Stratagem Image
         if (fs.existsSync(hdSpecialImagePath)) {
-          msg.channel.send(message.special[content], {files: [hdSpecialImagePath]});
+          msg.channel.send(message.helldivers.special[content], {files: [hdSpecialImagePath]});
         }
         
         // HD Supply Stratagem Image
         if (fs.existsSync(hdSupplyImagePath)) {
-          msg.channel.send(message.supply[content], {files: [hdSupplyImagePath]});
+          msg.channel.send(message.helldivers.supply[content], {files: [hdSupplyImagePath]});
         }
         
       }
@@ -143,10 +202,8 @@ client.on('message', msg => {
         
         const helpCommandEmbed = new Discord.RichEmbed()
         .setColor('#fbb3ff')
-        // .attachFile('img_misc/hisako.jpg')
         .setAuthor("Hi, I'm Ellipsis, which game info you're looking for?")
         .setDescription('Command Prefix : `...`')
-        // .setThumbnail('attachment://hisako.jpg')
         .addField('❯ HELLDIVERS™', '`hd`', true)
         .addField('❯ Portal Knights Wiki', '`pk`', true)
         .setTimestamp()
@@ -162,7 +219,7 @@ client.on('message', msg => {
 |-----------------------------------------------------------------------------
 */
 
-    if (msgContent === prefix+command.help_helldivers) {
+    if (msgContent === prefix+command.cmd_helldivers) {
         
         var offensive   = [];
         var defensive   = [];
@@ -170,20 +227,20 @@ client.on('message', msg => {
         var weapon      = [];
         var special     = [];
       
-        for (cmd in command.hd.offensive) {
-          offensive.push("`"+command.hd.offensive[cmd]+"` | ");
+        for (cmd in command.helldivers.offensive) {
+          offensive.push("`"+command.helldivers.offensive[cmd]+"` | ");
         }
-        for (cmd in command.hd.defensive) {
-          defensive.push("`"+command.hd.defensive[cmd]+"` | ");
+        for (cmd in command.helldivers.defensive) {
+          defensive.push("`"+command.helldivers.defensive[cmd]+"` | ");
         }
-        for (cmd in command.hd.supply) {
-          supply.push("`"+command.hd.supply[cmd]+"` | ");
+        for (cmd in command.helldivers.supply) {
+          supply.push("`"+command.helldivers.supply[cmd]+"` | ");
         }
-        for (cmd in command.hd.weapon) {
-          weapon.push("`"+command.hd.weapon[cmd]+"` | ");
+        for (cmd in command.helldivers.weapon) {
+          weapon.push("`"+command.helldivers.weapon[cmd]+"` | ");
         }
-        for (cmd in command.hd.special) {
-          special.push("`"+command.hd.special[cmd]+"` | ");
+        for (cmd in command.helldivers.special) {
+          special.push("`"+command.helldivers.special[cmd]+"` | ");
         }
       
         const helldiversEmbed = new Discord.RichEmbed()
@@ -205,10 +262,10 @@ client.on('message', msg => {
 
     // Transmitter objective steps
     switch(msgContent) {
-        case prefix+command.hd.trans : msg.channel.send(message.objective.trans_1 + 
-                                                        message.objective.trans_2 + 
-                                                        message.objective.trans_3 + 
-                                                        message.objective.trans_4);
+        case prefix+command.helldivers.trans : msg.channel.send(message.objective.trans_1 + 
+                                                                message.objective.trans_2 + 
+                                                                message.objective.trans_3 + 
+                                                                message.objective.trans_4);
         break;
     }
   
@@ -218,7 +275,7 @@ client.on('message', msg => {
 |-----------------------------------------------------------------------------
 */
     
-    if (msgContent === prefix+command.help_portalknights) {
+    if (msgContent === prefix+command.cmd_portal_knights) {
         
         const helpCommandEmbed = new Discord.RichEmbed()
         .setColor('#6583fc')
@@ -235,15 +292,15 @@ client.on('message', msg => {
 
     switch (msgContent) {
 
-        case "...pk weapons"     : msg.channel.send("https://portalknights.gamepedia.com/Weapons");
+        case "...pk weapons"     : msg.channel.send(message.portal_knights.weapons);
         break;
-        case "...pk armor"       : msg.channel.send("https://portalknights.gamepedia.com/Armor");
+        case "...pk armor"       : msg.channel.send(message.portal_knights.armor);
         break;
-        case "...pk blocks"      : msg.channel.send("https://portalknights.gamepedia.com/Blocks");
+        case "...pk blocks"      : msg.channel.send(message.portal_knights.blocks);
         break;
-        case "...pk ingredients" : msg.channel.send("https://portalknights.gamepedia.com/Ingredients");
+        case "...pk ingredients" : msg.channel.send(message.portal_knights.ingredients);
         break;
-        case "...pk portal"      : msg.channel.send("https://portalknights.gamepedia.com/Portal_Stones");
+        case "...pk portal"      : msg.channel.send(message.portal_knights.portal_stones);
         break;
         case "...pk crafting"    : msg.channel.send("https://portalknights.gamepedia.com/Crafting_Stations");
         break;
@@ -272,7 +329,7 @@ client.on('message', msg => {
 
 // Prevent from idling, send request to url every 1 minutes
 setInterval(function() {
-    https.get("https://ellipsis-dev.glitch.me");
+    https.get(process.env.LIVE_APP_URL);
     console.log("ping!");
 
 }, 60 * 1000);
