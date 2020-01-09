@@ -1,7 +1,7 @@
 {
     "help" : "help",
     "cmd_helldivers" : "hd",
-    "cmd_portal_knights" : "pk",
+    "cmd_portalknights" : "pk",
     "helldivers" : {
       "offensive" : 
       {
@@ -103,7 +103,7 @@
     
       "trans" : "hd trans"
     },
-    "portal_knights" : {
+    "portalknights" : {
       "class" : {
         "warrior" : "warrior",
         "ranger" : "ranger",

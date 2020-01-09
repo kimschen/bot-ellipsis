@@ -13,11 +13,13 @@ let https       = require("https");
 // Read & Parse json files
 let jsonMessage       = fs.readFileSync('message.json');
 let jsonCommand       = fs.readFileSync('command.json');
-let jsonPortalKnights = fs.readFileSync('portal_knights.json');
+let jsonEmbed         = fs.readFileSync('embed.json');
+let jsonEmbedField    = fs.readFileSync('embed_field.json');
 
-let message       = JSON.parse(jsonMessage);
-let command       = JSON.parse(jsonCommand);
-let portalKnights = JSON.parse(jsonPortalKnights);
+let message           = JSON.parse(jsonMessage);
+let command           = JSON.parse(jsonCommand);
+let embedData         = JSON.parse(jsonEmbed);
+let embedFieldData    = JSON.parse(jsonEmbedField);
 
 let flattenCmd  = flatten({command});
 
@@ -77,41 +79,48 @@ client.on('message', (receivedCommand) => {
         console.log(`Secondary Command: ${secondaryCommand}`);
         console.log(`Arguments: ${cmdArguments}`); // There may not be any cmdArguments
                     
-        if (primaryCommand == command.cmd_portal_knights) {
-          if (secondaryCommand == command.portal_knights.type.weapon) {
-            if (cmdArguments == command.portal_knights.class.warrior) {
+        if (primaryCommand == command.cmd_portalknights) {
+          if (secondaryCommand == command.portalknights.type.weapon) {
+            if (cmdArguments == command.portalknights.class.warrior) {
 
-              let data = portalKnights.weapon.warrior;
-              let data2 = portalKnights.weapon_test.warrior;
+              var portalKnightsEmbed = embedData.portalknights.weapon.warrior;
+              var portalKnightsFields = embedFieldData.portalknights.weapon.warrior;
               
-              var portalKnightsWeapon = new Discord.RichEmbed(data)
-              
-              receivedCommand.channel.send({embed : portalKnightsWeapon}).then(embedMessage => {
+              // Add fields into embed json
+              portalKnightsEmbed.fields = portalKnightsFields.slice(0, 5);
+                                  
+              var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed)                  
+                  
+              console.log(portalKnightsEmbed.fields.length);
+
+              receivedCommand.channel.send({embed : embedDisplay}).then(embedMessage => {
                 embedMessage.react('➡️');
                 embedMessage.react('⬅️');
-                
+
                 const filter = (reaction , user) => {
                   return ['⬅️', '➡️'].includes(reaction.emoji.name) && user.id === receivedCommand.author.id;
                 };
-                                
+
                 const collector = embedMessage.createReactionCollector(filter, { time: 60000 }); // 1 min
-                      
+
                 collector.on('collect', reaction => {
-                           
+
                   if (reaction.emoji.name == '➡️') {
-                                        
+
                     // Next page button
-                    var portalKnightsWeapon = new Discord.RichEmbed(data2);
-                    embedMessage.edit(portalKnightsWeapon)
-                  
+
+                    var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
+                    embedMessage.edit(embedDisplay)
+
                   } else {
                     // Previous page button
-                    var portalKnightsWeapon = new Discord.RichEmbed(data);
-                    embedMessage.edit(portalKnightsWeapon)
+                    var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
+                    embedMessage.edit(embedDisplay)
                   }
-                  })                
+                })                
               })
               .catch(err => console.error(err));
+
             }
           }
         }
@@ -202,7 +211,7 @@ client.on('message', msg => {
         
         const helpCommandEmbed = new Discord.RichEmbed()
         .setColor('#fbb3ff')
-        .setAuthor("Hi, I'm Ellipsis, which game info you're looking for?")
+        .setAuthor("Hi, I'm Ellipsis, which game content you're looking for?")
         .setDescription('Command Prefix : `...`')
         .addField('❯ HELLDIVERS™', '`hd`', true)
         .addField('❯ Portal Knights Wiki', '`pk`', true)
@@ -275,14 +284,14 @@ client.on('message', msg => {
 |-----------------------------------------------------------------------------
 */
     
-    if (msgContent === prefix+command.cmd_portal_knights) {
+    if (msgContent === prefix+command.cmd_portalknights) {
         
         const helpCommandEmbed = new Discord.RichEmbed()
         .setColor('#6583fc')
-        .attachFile('img_misc/portal_knights.png')
+        .attachFile('img_misc/portalknights.png')
         .setAuthor("Portal Knights")
         .setDescription('Command Prefix : `...pk`')
-        .setThumbnail('attachment://portal_knights.png')
+        .setThumbnail('attachment://portalknights.png')
         .addField('❯ Wiki', '`weapons` | `armor` | `blocks` | `ingredients` | `portal` | `crafting` | `tools` | `skills` | `consume` | `recipes` | `pets` | `events` | `islands` | `misc` | `bosses`', true)
         .setTimestamp()
         .setFooter('Ellipsis');
@@ -292,15 +301,15 @@ client.on('message', msg => {
 
     switch (msgContent) {
 
-        case "...pk weapons"     : msg.channel.send(message.portal_knights.weapons);
+        case "...pk weapons"     : msg.channel.send(message.portalknights.weapons);
         break;
-        case "...pk armor"       : msg.channel.send(message.portal_knights.armor);
+        case "...pk armor"       : msg.channel.send(message.portalknights.armor);
         break;
-        case "...pk blocks"      : msg.channel.send(message.portal_knights.blocks);
+        case "...pk blocks"      : msg.channel.send(message.portalknights.blocks);
         break;
-        case "...pk ingredients" : msg.channel.send(message.portal_knights.ingredients);
+        case "...pk ingredients" : msg.channel.send(message.portalknights.ingredients);
         break;
-        case "...pk portal"      : msg.channel.send(message.portal_knights.portal_stones);
+        case "...pk portal"      : msg.channel.send(message.portalknights.portal_stones);
         break;
         case "...pk crafting"    : msg.channel.send("https://portalknights.gamepedia.com/Crafting_Stations");
         break;

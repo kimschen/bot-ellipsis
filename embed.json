@@ -1,0 +1,11 @@
+{
+  "portalknights" : {
+    "weapon" : {
+      "warrior" : {
+        "author" : { "name" : "Portal Knights" },
+        "description" : "Official [Portal Knights](https://portalknights.com/en/) | Source [Fandom Wiki](https://portalknights.gamepedia.com/Portal_Knights_Wiki) \nDesc `... pk {type} {class} {id}`\nType `weapon` | `armor` \n Class `warrior` | `ranger` | `rogue` | `mage`",
+        "color": 8990890      
+      }
+    }
+  }    
+}
