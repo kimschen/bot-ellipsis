@@ -1,4 +1,12 @@
 {
+  "portalknights": { 
+    "weapons" : "https://portalknights.gamepedia.com/Weapons",
+    "armor" : "https://portalknights.gamepedia.com/Armor",
+    "blocks" : "https://portalknights.gamepedia.com/Blocks",
+    "ingredients" : "https://portalknights.gamepedia.com/Ingredients",
+    "portal_stones" : "https://portalknights.gamepedia.com/Portal_Stones"
+  },
+  "helldivers" : {
     "special":
     {
         "reinforce" : "Reinforce | `增援`\n:arrow_up: :arrow_down: :arrow_right: :arrow_left: :arrow_up:",
@@ -102,5 +110,5 @@
           "tanto" : "短刀",
           "trident" : "三叉戟"
     }
-
+  }
 }

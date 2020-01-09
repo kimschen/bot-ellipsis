@@ -1,0 +1,48 @@
+{ 
+  "portalknights" : {
+    "weapon" : {
+      "warrior" : [
+        {
+          "name" : "[ 1 ] Wooden Sword",
+          "value" : ":axe: `16` Phys. Dmg \n:white_small_square: `+13` HP"
+        },
+        {
+          "name" : "[ 2 ] Harchet of Hollows",
+          "value" : ":axe: `16` Phys. Dmg \n:white_small_square: `+20%` Critical Strike Chance \n:white_small_square: `+15%` Critical Strike Dmg"
+        },
+        {
+          "name" : "[ 3 ] Reinforced Wooden Sword",
+          "value" : ":axe: `28` Phys. Dmg \n:white_small_square: `+19` HP"
+        },
+        {
+          "name" : "[ 4 ] Copper Axe",
+          "value" : ":axe: `28` Phys. Dmg \n:white_small_square: `+3` Critical Strike Dmg"
+        },
+        {
+          "name" : "[ 5 ] Sugar-Free Cupid Corn Axe",
+          "value" : ":axe: `40` Phys. Dmg \n:small_orange_diamond: Trick or Treat"
+        },
+        {
+          "name" : "[ 6 ]",
+          "value" : ":axe: `16` Phys. Dmg \n:white_small_square: `+13` HP"
+        },
+        {
+          "name" : "[ 7 ]",
+          "value" : ":axe: `16` Phys. Dmg \n:white_small_square: `+20%` Critical Strike Chance \n:white_small_square: `+15%` Critical Strike Dmg"
+        },
+        {
+          "name" : "[ 8 ]",
+          "value" : ":axe: `28` Phys. Dmg \n:white_small_square: `+19` HP"
+        },
+        {
+          "name" : "[ 9 ]",
+          "value" : ":axe: `28` Phys. Dmg \n:white_small_square: `+3` Critical Strike Dmg"
+        },
+        {
+          "name" : "[ 10 ]",
+          "value" : ":axe: `40` Phys. Dmg \n:small_orange_diamond: Trick or Treat"
+        }
+      ]
+    }
+  }
+}
