@@ -54,7 +54,7 @@ client.on('ready', () => {
   
     // const channel = client.channels.find(ch => ch.name === 'ellipsis');
 });
-
+var index = 0;
 client.on('message', (receivedCommand) => {
   
     // Prevent bot from responding to its own messages
@@ -65,6 +65,10 @@ client.on('message', (receivedCommand) => {
     if (receivedCommand.content.startsWith("...")) {
         processCommand(receivedCommand);
     }
+       
+  
+    
+  
   
     function processCommand(receivedCommand) {
         
@@ -90,7 +94,6 @@ client.on('message', (receivedCommand) => {
               portalKnightsEmbed.fields = portalKnightsFields.slice(0, 5);
                                   
               var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed)                  
-                  
               console.log(portalKnightsEmbed.fields.length);
 
               receivedCommand.channel.send({embed : embedDisplay}).then(embedMessage => {
@@ -104,18 +107,32 @@ client.on('message', (receivedCommand) => {
                 const collector = embedMessage.createReactionCollector(filter, { time: 60000 }); // 1 min
 
                 collector.on('collect', reaction => {
+                  var i = 0
 
                   if (reaction.emoji.name == '➡️') {
 
                     // Next page button
-
-                    var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
-                    embedMessage.edit(embedDisplay)
-
+                    var indexStart = portalKnightsEmbed.fields.length;
+                    var i = 0;
+                    while(i <= portalKnightsFields.length) {
+                        
+                        portalKnightsEmbed.fields = portalKnightsFields.slice(indexStart, i);
+                        var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
+                        embedMessage.edit(embedDisplay)
+                        i+=5;
+                    }
+                    
                   } else {
+                    
+                    var x = portalKnightsFields.length;
                     // Previous page button
-                    var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
-                    embedMessage.edit(embedDisplay)
+                    while(x >= 5) {
+                        
+                        portalKnightsEmbed.fields = portalKnightsFields.slice(indexStart, x);
+                        var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
+                        embedMessage.edit(embedDisplay)
+                        x-=5;
+                    }
                   }
                 })                
               })
