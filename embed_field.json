@@ -23,24 +23,24 @@
           "value" : ":axe: `40` Phys. Dmg \n:small_orange_diamond: Trick or Treat"
         },
         {
-          "name" : "[ 6 ]",
-          "value" : ":axe: `16` Phys. Dmg \n:white_small_square: `+13` HP"
+          "name" : "[ 6 ] Copper Throwing Axe",
+          "value" : ":axe: `40` Phys. Dmg \n:white_small_square: None"
         },
         {
-          "name" : "[ 7 ]",
-          "value" : ":axe: `16` Phys. Dmg \n:white_small_square: `+20%` Critical Strike Chance \n:white_small_square: `+15%` Critical Strike Dmg"
+          "name" : "[ 7 ] Mountainfall",
+          "value" : ":axe: `40` Phys. Dmg \n:white_small_square: `+25` HP"
         },
         {
-          "name" : "[ 8 ]",
-          "value" : ":axe: `28` Phys. Dmg \n:white_small_square: `+19` HP"
+          "name" : "[ 8 ] Copper Clasps",
+          "value" : ":axe: `28` Phys. Dmg \n:white_small_square: `+7%` Multi-Strike Chance"
         },
         {
-          "name" : "[ 9 ]",
-          "value" : ":axe: `28` Phys. Dmg \n:white_small_square: `+3` Critical Strike Dmg"
+          "name" : "[ 9 ] Club of Lost Souls",
+          "value" : ":axe: `46` Phys. Dmg \n:white_small_square: `+27%` Critical Strike Chance \n:white_small_square: `+6%` Critical Strike Dmg \n:small_orange_diamond: Extraction"
         },
         {
-          "name" : "[ 10 ]",
-          "value" : ":axe: `40` Phys. Dmg \n:small_orange_diamond: Trick or Treat"
+          "name" : "[ 10 ] Copper Longsword",
+          "value" : ":axe: `52` Phys. Dmg \n:white_small_square: `+31` HP"
         }
       ]
     }
