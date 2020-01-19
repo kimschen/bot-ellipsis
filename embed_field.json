@@ -41,6 +41,46 @@
         {
           "name" : "[ 10 ] Copper Longsword",
           "value" : ":axe: `52` Phys. Dmg \n:white_small_square: `+31` HP"
+        },
+        {
+          "name" : "[11] Copper Hammer",
+          "value" : ":axe: `52` Phys. Dmg \n:white_small_square: `+31` HP Reg"
+        },
+        {
+          "name" : "[12] Copper Greataxe",
+          "value" : ":axe: `52` Phys. Dmg \n:white_small_square: `+6%` Critical Strike Dmg"
+        },      
+        {
+          "name" : "[13] Worm Scourge",
+          "value" : ":axe: `70` Electro Dmg \n:white_small_square: `+40` HP \n:white_small_square: `+6%` Dodge Chance"
+        },
+        {
+          "name" : "[14] Greater Copper Clasps",
+          "value" : ":axe: `70` Fire Dmg \n:white_small_square: `+10%` Multi-Strike Chance \n:white_small_square: `+1` Additional Strikes"
+        },        
+        {
+          "name" : "[15] Worm Cutter",
+          "value" : ":axe: `70` Phys. Dmg \n:white_small_square: `+40` MP"
+        },
+        {
+          "name" : "[16] Iron Hammer",
+          "value" : ":axe: `88` Phys. Dmg \n:white_small_square: `+49` HP Reg"
+        },
+        {
+          "name" : "[17] Iron Longsword",
+          "value" : ":axe: `88` Phys. Dmg \n:white_small_square: `+10` MP Reg \n:white_small_square: `+49` HP"
+        },
+        {
+          "name" : "[18] Iron Greateaxe",
+          "value" : ":axe: `88` Phys. Dmg \n:white_small_square: `+9%` Critical Strike Dmg \n:white_small_square: `+18%` Critical Strike Chance"
+        },
+        {
+          "name" : "[19] Regular Flavor Cupid Corn Axe",
+          "value" : ":axe: `100` Phys. Dmg \n:small_orange_diamond: Trick or Treat"
+        },
+        {
+          "name" : "[20] Iron Clutches",
+          "value" : ":axe: `100` Water Dmg \n:white_small_square: `+12%` Multi-Strike Chance \n:white_small_square: `+1` Additional Strikes"
         }
       ]
     }
