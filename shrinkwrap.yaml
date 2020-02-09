@@ -1,12 +1,12 @@
 dependencies:
-  contentful: 7.10.0
-  contentful-management: 5.11.2
+  contentful: 7.13.1
+  contentful-management: 5.12.0
   discord.js: 11.5.1
   express: 4.17.1
   express-glitch-keepalive: 0.2.0
   firebase-admin: 8.6.0
   firebase-tools: 7.4.0
-  flat: 4.1.0
+  flat: 5.0.0
 packages:
   /@firebase/app-types/0.4.4:
     dev: false
@@ -409,13 +409,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
-  /axios/0.19.0:
+  /axios/0.19.2:
     dependencies:
       follow-redirects: 1.5.10
-      is-buffer: 2.0.4
     dev: false
     resolution:
-      integrity: sha512-1uvKqKQta3KBxIz14F2v06AEHZ/dIoeKfbTRkK1E5oqjDnuEerLmYTgJB5AiQZHJcljpg1TuRzdjDR06qNk0DQ==
+      integrity: sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
   /balanced-match/1.0.0:
     dev: false
     resolution:
@@ -837,16 +836,16 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
-  /contentful-management/5.11.2:
+  /contentful-management/5.12.0:
     dependencies:
-      axios: 0.19.0
+      axios: 0.19.2
       contentful-sdk-core: 6.4.0
       lodash: 4.17.15
     dev: false
     engines:
       node: '>=6'
     resolution:
-      integrity: sha512-ey6OlAgDZlNn4d9bE4O6a0zZ/13qNHqxE6kkBHBkTUVdtrAS5lIaujmrUpyKgdKZAubL3OJJjGrx4jS1dZMBDQ==
+      integrity: sha512-uB19lrSK9q6V8plU8M7PBfZ96rny/Q7mh9pU1H8xmVFSRv7h/cGHZ3qV19HNtq6PWTGVq6i93jsO0RQmKbrHog==
   /contentful-resolve-response/1.1.4:
     dependencies:
       lodash: 4.17.15
@@ -858,15 +857,15 @@ packages:
   /contentful-sdk-core/6.4.0:
     dependencies:
       lodash: 4.17.15
-      qs: 6.9.0
+      qs: 6.9.1
     dev: false
     engines:
       node: '>=6'
     resolution:
       integrity: sha512-UvYQ/Wrt5EntlMSBbgqgvKfTBRzf6fIT2p5Wp7bsnA3/KLEiYcYd/2qhUKw4x9nfp+0G8B1s4TpDwxV0oymBiA==
-  /contentful/7.10.0:
+  /contentful/7.13.1:
     dependencies:
-      axios: 0.19.0
+      axios: 0.19.2
       contentful-resolve-response: 1.1.4
       contentful-sdk-core: 6.4.0
       json-stringify-safe: 5.0.1
@@ -875,7 +874,7 @@ packages:
     engines:
       node: '>=6'
     resolution:
-      integrity: sha512-ZXDwLpNC3NVM3498XyJJ7YfOuQ8QV6xUMXYj95NnLOnORyvBqmahoL+mxfUppCaS+8dFR3C45dtKHIDWm4DUyA==
+      integrity: sha512-wXKyKYGquLQ/PvFQFDyyrA1C19YxO5HgI5vgeQBEO/IoKNVv0dJp41x6WWXwEVf5Q3/8EfVVmhAMT0OeAJJLcQ==
   /cookie-signature/1.0.6:
     dev: false
     resolution:
@@ -1495,13 +1494,13 @@ packages:
     dev: false
     resolution:
       integrity: sha1-m6p4Ct8FAfKC1ybJxqA426ROp28=
-  /flat/4.1.0:
+  /flat/5.0.0:
     dependencies:
       is-buffer: 2.0.4
     dev: false
     hasBin: true
     resolution:
-      integrity: sha512-Px/TiLIznH7gEDlPXcUD4KnBusa6kR6ayRUVcnEAbreRIuhkqow/mun59BuRXwoYk7ZQOLW1ZM05ilIvK38hFw==
+      integrity: sha512-6KSMM+cHHzXC/hpldXApL2S8Uz+QZv+tq5o/L0KQYleoG+GcwrnIJhTWC7tCOiKQp8D/fIvryINU1OZCCwevjA==
   /follow-redirects/1.5.10:
     dependencies:
       debug: 3.1.0
@@ -3003,12 +3002,12 @@ packages:
       node: '>=0.6'
     resolution:
       integrity: sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
-  /qs/6.9.0:
+  /qs/6.9.1:
     dev: false
     engines:
       node: '>=0.6'
     resolution:
-      integrity: sha512-27RP4UotQORTpmNQDX8BHPukOnBP3p1uUJY5UnDhaJB+rMt9iMsok724XL+UHU23bEFOHRMQ2ZhI99qOWUMGFA==
+      integrity: sha512-Cxm7/SS/y/Z3MHWSxXb8lIFqgqBowP5JMlTUFyJN88y0SGQhVmZnqFK/PeuMX9LzUyWsqqhNxIyg0jlzq946yA==
   /range-parser/1.2.1:
     dev: false
     engines:
@@ -3926,11 +3925,11 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
-  contentful: ^7.10.0
-  contentful-management: ^5.11.2
+  contentful: ^7.13.1
+  contentful-management: ^5.12.0
   discord.js: ^11.5.1
   express: ^4.17.1
   express-glitch-keepalive: ^0.2.0
   firebase-admin: ^8.6.0
   firebase-tools: ^7.4.0
-  flat: ^4.1.0
+  flat: ^5.0.0

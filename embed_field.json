@@ -4,19 +4,19 @@
       "warrior" : [
         {
           "name" : "[ 1 ] Wooden Sword",
-          "value" : ":axe: `16` Phys. Dmg \n:white_small_square: `+13` HP"
+          "value" : ":axe: `16` Phys. Dmg \n:black_small_square: `+13` HP"
         },
         {
           "name" : "[ 2 ] Harchet of Hollows",
-          "value" : ":axe: `16` Phys. Dmg \n:white_small_square: `+20%` Critical Strike Chance \n:white_small_square: `+15%` Critical Strike Dmg"
+          "value" : ":axe: `16` Phys. Dmg \n:black_small_square: `+20%` Critical Strike Chance \n:black_small_square: `+15%` Critical Strike Dmg \n:small_orange_diamond: Extraction"
         },
         {
           "name" : "[ 3 ] Reinforced Wooden Sword",
-          "value" : ":axe: `28` Phys. Dmg \n:white_small_square: `+19` HP"
+          "value" : ":axe: `28` Phys. Dmg \n:black_small_square: `+19` HP"
         },
         {
           "name" : "[ 4 ] Copper Axe",
-          "value" : ":axe: `28` Phys. Dmg \n:white_small_square: `+3` Critical Strike Dmg"
+          "value" : ":axe: `28` Phys. Dmg \n:black_small_square: `+3` Critical Strike Dmg"
         },
         {
           "name" : "[ 5 ] Sugar-Free Cupid Corn Axe",
@@ -24,63 +24,191 @@
         },
         {
           "name" : "[ 6 ] Copper Throwing Axe",
-          "value" : ":axe: `40` Phys. Dmg \n:white_small_square: None"
+          "value" : ":axe: `40` Phys. Dmg"
         },
         {
           "name" : "[ 7 ] Mountainfall",
-          "value" : ":axe: `40` Phys. Dmg \n:white_small_square: `+25` HP"
+          "value" : ":axe: `40` Phys. Dmg \n:black_small_square: `+25` HP"
         },
         {
           "name" : "[ 8 ] Copper Clasps",
-          "value" : ":axe: `28` Phys. Dmg \n:white_small_square: `+7%` Multi-Strike Chance"
+          "value" : ":axe: `28` Fire. Dmg \n:black_small_square: `+7%` Multi-Strike Chance"
         },
         {
           "name" : "[ 9 ] Club of Lost Souls",
-          "value" : ":axe: `46` Phys. Dmg \n:white_small_square: `+27%` Critical Strike Chance \n:white_small_square: `+6%` Critical Strike Dmg \n:small_orange_diamond: Extraction"
+          "value" : ":axe: `46` Phys. Dmg \n:black_small_square: `+27%` Critical Strike Chance \n:black_small_square: `+6%` Critical Strike Dmg \n:small_orange_diamond: Extraction"
         },
         {
           "name" : "[ 10 ] Copper Longsword",
-          "value" : ":axe: `52` Phys. Dmg \n:white_small_square: `+31` HP"
+          "value" : ":axe: `52` Phys. Dmg \n:black_small_square: `+31` HP"
         },
         {
-          "name" : "[11] Copper Hammer",
-          "value" : ":axe: `52` Phys. Dmg \n:white_small_square: `+31` HP Reg"
+          "name" : "[ 11 ] Copper Hammer",
+          "value" : ":axe: `52` Phys. Dmg \n:black_small_square: `+31` HP Reg"
         },
         {
-          "name" : "[12] Copper Greataxe",
-          "value" : ":axe: `52` Phys. Dmg \n:white_small_square: `+6%` Critical Strike Dmg"
+          "name" : "[ 12 ] Copper Greataxe",
+          "value" : ":axe: `52` Phys. Dmg \n:black_small_square: `+6%` Critical Strike Dmg"
         },      
         {
-          "name" : "[13] Worm Scourge",
-          "value" : ":axe: `70` Electro Dmg \n:white_small_square: `+40` HP \n:white_small_square: `+6%` Dodge Chance"
+          "name" : "[ 13 ] Worm Scourge",
+          "value" : ":axe: `70` Electro. Dmg \n:black_small_square: `+40` HP \n:black_small_square: `+6%` Dodge Chance"
         },
         {
-          "name" : "[14] Greater Copper Clasps",
-          "value" : ":axe: `70` Fire Dmg \n:white_small_square: `+10%` Multi-Strike Chance \n:white_small_square: `+1` Additional Strikes"
+          "name" : "[ 14 ] Greater Copper Clasps",
+          "value" : ":axe: `70` Fire. Dmg \n:black_small_square: `+10%` Multi-Strike Chance \n:black_small_square: `+1` Additional Strikes"
         },        
         {
-          "name" : "[15] Worm Cutter",
-          "value" : ":axe: `70` Phys. Dmg \n:white_small_square: `+40` MP"
+          "name" : "[ 15 ] Worm Cutter",
+          "value" : ":axe: `70` Phys. Dmg \n:black_small_square: `+40` MP"
         },
         {
-          "name" : "[16] Iron Hammer",
-          "value" : ":axe: `88` Phys. Dmg \n:white_small_square: `+49` HP Reg"
+          "name" : "[ 16 ] Iron Hammer",
+          "value" : ":axe: `88` Phys. Dmg \n:black_small_square: `+49` HP Reg"
         },
         {
-          "name" : "[17] Iron Longsword",
-          "value" : ":axe: `88` Phys. Dmg \n:white_small_square: `+10` MP Reg \n:white_small_square: `+49` HP"
+          "name" : "[ 17 ] Iron Longsword",
+          "value" : ":axe: `88` Phys. Dmg \n:black_small_square: `+10` MP Reg \n:black_small_square: `+49` HP"
         },
         {
-          "name" : "[18] Iron Greateaxe",
-          "value" : ":axe: `88` Phys. Dmg \n:white_small_square: `+9%` Critical Strike Dmg \n:white_small_square: `+18%` Critical Strike Chance"
+          "name" : "[ 18 ] Iron Greateaxe",
+          "value" : ":axe: `88` Phys. Dmg \n:black_small_square: `+9%` Critical Strike Dmg \n:black_small_square: `+18%` Critical Strike Chance"
         },
         {
-          "name" : "[19] Regular Flavor Cupid Corn Axe",
+          "name" : "[ 19 ] Regular Flavor Cupid Corn Axe",
           "value" : ":axe: `100` Phys. Dmg \n:small_orange_diamond: Trick or Treat"
         },
         {
-          "name" : "[20] Iron Clutches",
-          "value" : ":axe: `100` Water Dmg \n:white_small_square: `+12%` Multi-Strike Chance \n:white_small_square: `+1` Additional Strikes"
+          "name" : "[ 20 ] Iron Clutches",
+          "value" : ":axe: `100` Water. Dmg \n:black_small_square: `+12%` Multi-Strike Chance \n:black_small_square: `+1` Additional Strikes"
+        },
+        {
+          "name" : "[ 21 ] Captain Brinebeard's Cursed Saber",
+          "value" : ":axe: `100` Phys. Dmg \n:small_blue_diamond: `35` Armor \n:small_orange_diamond: Cursed"
+        },
+        {
+          "name" : "[ 22 ] Iron Rebuttal",
+          "value" : ":axe: `100` Phys. Dmg \n:black_small_square: `+55` HP \n:black_small_square: `+5%` Dodge Chance"
+        },
+        {
+          "name" : "[ 23 ] Iron Throwing Axe",
+          "value" : ":axe: `100` Phys. Dmg"
+        },
+        {
+          "name" : "[ 24 ] Sickle of Sorrows",
+          "value" : ":axe: `106` Phys. Dmg \n:black_small_square: `+8%` Critical Strike Dmg \n:black_small_square: `+41%` Critical Strike Chance"
+        },
+        {
+          "name" : "[ 25 ] Iron Greatsword",
+          "value" : ":axe: `112` Phys. Dmg \n:black_small_square: `+61` HP \n:black_small_square: `+12` Mana Reg"
+        },
+        {
+          "name" : "[ 26 ] Iron Masterwork Greathammer",
+          "value" : ":axe: `112` Phys. Dmg \n:small_blue_diamond: `50` Armor \n:black_small_square: `+61` HP Reg"
+        },
+        { 
+          "name" : "[ 27 ] Iron Cleaver",
+          "value" : ":axe: `112` Phys. Dmg \n:black_small_square: `+12%` Critical Strike Dmg \n:black_small_square: `+21%` Critical Strike Chance"
+        },
+        {
+          "name" : "[ 28 ] Joren's Revenge",
+          "value" : ":axe: `130` Phys. Dmg \n:black_small_square: `+70` Mana \n:small_blue_diamond: `50` Armor \n:small_orange_diamond: Wispful"
+        },
+        {
+          "name" : "[ 29 ] Greater Iron Clutches",
+          "value" : ":axe: `130` Water. Dmg \n:black_small_square: `+15%` Multi-Strike Chance \n:black_small_square: `+1` Additional Strikes \n:black_small_square: `+70` HP Reg"
+        },
+        {
+          "name" : "[ 30 ] Queen Slayer",
+          "value" : ":axe: `130` Electro. Dmg \n:black_small_square: `+70` HP \n:black_small_square: `+8%` Dodge Chance \n:black_small_square: `+4%` Melee Dmg Resist"
+        },
+        {
+          "name" : "[ 31 ] Golden Greatsword",
+          "value" : ":axe: `148` Phys. Dmg \n:black_small_square: `+79` HP \n:black_small_square: `+16` Mana Reg \n:small_orange_diamond: Absorber"
+        },
+        {
+          "name" : "[ 32 ] Gold Masterwork Greathammer",
+          "value" : ":axe: `148` Phys. Dmg \n:black_small_square: `+79` HP Reg \n:small_blue_diamond: `70` Armor \n:small_orange_diamond: Life Force"
+        },
+        {
+          "name" : "[ 33 ] Gold Masterwork Cleaver",
+          "value" : ":axe: `148` Phys. Dmg \n:black_small_square: `+16%` Critical Strike Dmg \n:black_small_square: `+25%` Critical Strike Chance \n:black_small_square: `+40` HP"
+        },
+        {
+          "name" : "[ 34 ] Golden Throwing Axe",
+          "value" : ":axe: `160` Phys. Dmg"
+        },
+        {
+          "name" : "[ 35 ] Gold Masterwork Fists of War",
+          "value" : ":axe: `160` Light. Dmg \n:black_small_square: `+17%` Multi-Strike Chance \n:black_small_square: `+1` Additional Strikes \n:black_small_square: `+85` HP Reg"
+        },
+        {
+          "name" : "[ 36 ] Bonegrinder",
+          "value" : ":axe: `160` Electro. Dmg \n:black_small_square: `+85` HP \n:black_small_square: `+10%` Dodge Chance \n:black_small_square: `+4%` Melee Dmg Resist"
+        },
+        {
+          "name" : "[ 37 ] Beastbane",
+          "value" : ":axe: `160` Phys. Dmg \n:black_small_square: `+85` HP Reg \n:small_blue_diamond: `90` Armor \n:small_orange_diamond: Life Force"
+        },
+        {
+          "name" : "[ 38 ] Golden Woe",
+          "value" : ":axe: `160` Phys. Dmg \n:black_small_square: `+85` HP \n:black_small_square: `+17` Mana Reg \n:small_orange_diamond: Absorber"
+        },
+        {
+          "name" : "[ 39 ] Pumpkin Spice Cupid Corn Axe",
+          "value" : ":axe: `160` Phys. Dmg \n:small_orange_diamond: Trick or Treat"
+        },
+        {
+          "name" : "[ 40 ] Mace of Terrors",
+          "value" : ":axe: `172` Phys. Dmg \n:black_small_square: `+9%` Critical Strike Dmg \n:black_small_square: `+56%` Critical Strike Chance \n:small_orange_diamond: Extraction"
+        },
+        {
+          "name" : "[ 41 ] Titanium Masterwork Warhammer",
+          "value" : ":axe: `172` Phys. Dmg \n:black_small_square: `+91` HP Reg \n:small_blue_diamond: `120` \n:small_orange_diamond: Life Force"
+        },
+        {
+          "name" : "[ 42 ] Titanium Masterwork Cleaver",
+          "value" : ":axe: `172` Phys. Dmg \n:black_small_square: `+18%` Critical Strike Dmg \n:black_small_square: `+28%` Critical Strike Chance \n:black_small_square: `+46` HP"
+        },
+        {
+          "name" : "[ 43 ] Titanium Masterwork Broadsword",
+          "value" : ":axe: `172` Phys. Dmg \n:black_small_square: `+91` HP \n:black_small_square: `+18` Mana Reg \n:small_orange_diamond: Absorber"
+        },
+        {
+          "name" : "[ 44 ] Meera's Argument Ender",
+          "value" : ":axe: `190` Phys. Dmg \n:black_small_square: `+100` HP \n:black_small_square: `+10%` Dodge Chance \n:black_small_square: `+20` Mana Reg"
+        },
+        {
+          "name" : "[ 45 ] Titanium Masterwork Fists of War",
+          "value" : ":axe: `190` Light. Dmg \n:black_small_square: `+20%` Multi Strike Chance \n:black_small_square: `+1` Additional Strikes \n:black_small_square: `+100` HP Reg"
+        },
+        {
+          "name" : "[ 46 ] Fangs of Arden",
+          "value" : ":axe: `190` Phys. Dmg \n:black_small_square: `+100` Mana \n:small_orange_diamond: Wispful "
+        },
+        {
+          "name" : "[ 47 ] Hollow Assassin",
+          "value" : ":axe: `190` Electro. Dmg \n:black_small_square: `+100` HP \n:black_small_square: `+12%` Dodge Chance \n:black_small_square: `+5%` Melee Dmg Resist"
+        },
+        {
+          "name" : "[ 48 ] Titanium Throwing Axe",
+          "value" : ":axe: `190` Phys. Dmg"
+        },
+        {
+          "name" : "[ 49 ] Crystal Executioner",
+          "value" : ":axe: `202` Dark. Dmg \n:black_small_square: `106` HP \n:black_small_square: `+21` Mana Reg \n:small_orange_diamond: Absorber"
+        },
+        {
+          "name" : "[ 50 ] Skybolt",
+          "value" : ":axe: `202` Electro. Dmg \n:black_small_square: `109` HP \n:black_small_square: `+22` Mana Reg \n:small_orange_diamond: Absorber"
+        },
+        {
+          "name" : "[ 51 ] Hoarfrost",
+          "value" : ":axe: `202` Water. Dmg \n:black_small_square: `109` HP \n:black_small_square: `+22` Mana Reg \n:small_orange_diamond: Absorber"
+        },
+        {
+          "name" : "[ 52 ] Celestial Wrath",
+          "value" : ":axe: `202` Light. Dmg \n:black_small_square: `109` HP \n:black_small_square: `+22` Mana Reg \n:small_orange_diamond: Absorber"
         }
       ]
     }
