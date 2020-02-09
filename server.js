@@ -3,12 +3,12 @@ const app         = express();
 const keepAlive   = express();
 const fs          = require('fs');
 const Discord     = require('discord.js');
-const path        = require('path');
-const client      = new Discord.Client();
+const bot         = new Discord.Client();
 const keepalive   = require('express-glitch-keepalive');
 const flatten     = require('flat');
 const contentful  = require('contentful-management');
-let https         = require("https");
+const https       = require("https");
+const Helldivers  = require('./contents/helldivers.js');
 
 // Read & Parse json files
 let jsonMessage       = fs.readFileSync('message.json');
@@ -47,23 +47,31 @@ const contentfulClient = contentful.createClient({
   accessToken: process.env.CONTENTFUL_APIKEY
 })
 
-client.on('ready', () => {
+bot.on('ready', () => {
   
-    client.user.setActivity('... help', {type: 'LISTENING'});
-    console.log(`Logged in as ${client.user.tag}!`);  
+    bot.user.setActivity('... help', {type: 'LISTENING'});
+    console.log(`Logged in as ${bot.user.tag}!`);  
   
-    // const channel = client.channels.find(ch => ch.name === 'ellipsis');
+    // const channel = bot.channels.find(ch => ch.name === 'ellipsis');
 });
+
 var index = 0;
-client.on('message', (receivedCommand) => {
+
+bot.on('message', (receivedCommand) => {
   
     // Prevent bot from responding to its own messages
-    if (receivedCommand.author == client.user) {
+    if (receivedCommand.author == bot.user) {
         return
     }
   
     if (receivedCommand.content.startsWith("...")) {
         processCommand(receivedCommand);
+    }
+  
+    if (receivedCommand.content.startsWith("... hd ")) {
+      
+      Helldivers.processImageCommand(fs, message, receivedCommand);
+    
     }
   
     function processCommand(receivedCommand) {
@@ -104,16 +112,16 @@ client.on('message', (receivedCommand) => {
 
                 collector.on('collect', reaction => {
 
-                    // Next page button                        
-                    if (reaction.emoji.name == '➡️') {
+                  // Next page button                        
+                  if (reaction.emoji.name == '➡️') {
 
-                        var indexList = portalKnightsFields.indexOf(portalKnightsEmbed.fields[4]);
-                        console.log(`index list ${indexList}`);
-                      
-                        portalKnightsEmbed.fields = portalKnightsFields.slice(indexList+1,indexList+6);
-                      
+                    var indexList = portalKnightsFields.indexOf(portalKnightsEmbed.fields[4]);
+                    console.log(`index list ${indexList}`);
+
+                    portalKnightsEmbed.fields = portalKnightsFields.slice(indexList+1,indexList+6);
+
 //                         if (indexList > 19) {
-                          
+
 //                           console.log("index -1 true");
 //                           portalKnightsEmbed.fields = portalKnightsFields.slice(0,5);
 //                           var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
@@ -121,12 +129,12 @@ client.on('message', (receivedCommand) => {
 
 //                         } 
 
-                        var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
-                        embedMessage.edit(embedDisplay)
-                          
-                      
-                        console.log(`index of ${portalKnightsFields.indexOf(portalKnightsEmbed.fields[4])}`);
-                        console.log("end");
+                      var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
+                      embedMessage.edit(embedDisplay)
+
+
+                      console.log(`index of ${portalKnightsFields.indexOf(portalKnightsEmbed.fields[4])}`);
+                      console.log("end");
                       
                                             
                   } else {
@@ -160,77 +168,16 @@ client.on('message', (receivedCommand) => {
     }
 });
 
-client.on('message', msg => {
-  
-  if ( msg.content == "what should we do now?") {
-    msg.channel.send("Sleep!");
-  }
-  
-});
-
-client.on('message', (msg) => {
-  
-    if (msg.author == client.user) {
-        return
-    }
-    
-    if (msg.content.startsWith("... hd ")) {
-      
-      processImageCommand(msg);
-    
-    }
-    
-    function processImageCommand(msg) {
-      
-      let content = msg.content.toLowerCase().substr(6);      
-      let hdWeaponImagePath  = __dirname +"/img_weapon/"+content+".png";
-      let hdDefensiveImagePath = __dirname +"/img_stratagem/defensive/"+content+".png";
-      let hdOffensiveImagePath = __dirname +"/img_stratagem/offensive/"+content+".png";
-      let hdSpecialImagePath = __dirname +"/img_stratagem/special/"+content+".png";
-      let hdSupplyImagePath = __dirname +"/img_stratagem/supply/"+content+".png";
-
-      if (content) {
-        
-        // HD Weapon Image
-        if (fs.existsSync(hdWeaponImagePath)) {
-          msg.channel.send(message.helldivers.weapon[content], {files: [hdWeaponImagePath]});
-        }
-
-        // HD Defensive Stratagem Image
-        if (fs.existsSync(hdDefensiveImagePath)) {
-          msg.channel.send(message.helldivers.defensive[content], {files: [hdDefensiveImagePath]});
-        }
-        
-        // HD Offensive Stratagem Image
-        if (fs.existsSync(hdOffensiveImagePath)) {
-          msg.channel.send(message.helldivers.offensive[content], {files: [hdOffensiveImagePath]});
-        }
-        
-        // HD Special Stratagem Image
-        if (fs.existsSync(hdSpecialImagePath)) {
-          msg.channel.send(message.helldivers.special[content], {files: [hdSpecialImagePath]});
-        }
-        
-        // HD Supply Stratagem Image
-        if (fs.existsSync(hdSupplyImagePath)) {
-          msg.channel.send(message.helldivers.supply[content], {files: [hdSupplyImagePath]});
-        }
-        
-      }
-    }
-        
-});
-
 /*
 |-----------------------------------------------------------------------------
 | /help Command
 |-----------------------------------------------------------------------------
 */
 
-client.on('message', msg => {
+bot.on('message', msg => {
         
     // Prevent bot from responding to its own messages
-    if (msg.author == client.user) {
+    if (msg.author == bot.user) {
         return
     }
 
@@ -262,26 +209,34 @@ client.on('message', msg => {
 
     if (msgContent === prefix+command.cmd_helldivers) {
         
-        var offensive   = [];
-        var defensive   = [];
-        var supply      = [];
-        var weapon      = [];
-        var special     = [];
+        var stratagems = {
+          "offensive" : [],
+          "defensive" : [],
+          "supply"    : [],
+          "weapon"    : [],
+          "special"   : []
+        };
+      
+        // var offensive   = [];
+        // var defensive   = [];
+        // var supply      = [];
+        // var weapon      = [];
+        // var special     = [];
       
         for (cmd in command.helldivers.offensive) {
-          offensive.push("`"+command.helldivers.offensive[cmd]+"` | ");
+          stratagems.offensive.push("`"+command.helldivers.offensive[cmd]+"` | ");
         }
         for (cmd in command.helldivers.defensive) {
-          defensive.push("`"+command.helldivers.defensive[cmd]+"` | ");
+          stratagems.defensive.push("`"+command.helldivers.defensive[cmd]+"` | ");
         }
         for (cmd in command.helldivers.supply) {
-          supply.push("`"+command.helldivers.supply[cmd]+"` | ");
+          stratagems.supply.push("`"+command.helldivers.supply[cmd]+"` | ");
         }
         for (cmd in command.helldivers.weapon) {
-          weapon.push("`"+command.helldivers.weapon[cmd]+"` | ");
+          stratagems.weapon.push("`"+command.helldivers.weapon[cmd]+"` | ");
         }
         for (cmd in command.helldivers.special) {
-          special.push("`"+command.helldivers.special[cmd]+"` | ");
+          stratagems.special.push("`"+command.helldivers.special[cmd]+"` | ");
         }
       
         const helldiversEmbed = new Discord.RichEmbed()
@@ -289,12 +244,12 @@ client.on('message', msg => {
         .setAuthor('HELLDIVERS™', 'https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/','https://helldivers.gamepedia.com/Stratagems')
         .setDescription('Command Prefix : `... hd`')
         .setThumbnail('https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/')
-        .addField('❯ Offensive Stratagems', offensive.join(" "), true)
-        .addField('❯ Defensive Stratagems', defensive.join(" "), true)
-        .addField('❯ Supply Stratagems', supply.join(" "), true)
-        .addField('❯ Weapons', weapon.join(" "), true)
-        .addField('❯ Special Stratagems', special.join(" "), true)
-        .addField('❯ Transmitter Objective Key','`trans`',true)
+        .addField('❯ Offensive Stratagems', stratagems.offensive.join(" "))
+        .addField('❯ Defensive Stratagems', stratagems.defensive.join(" "))
+        .addField('❯ Supply Stratagems', stratagems.supply.join(" "))
+        .addField('❯ Weapons', stratagems.weapon.join(" "))
+        .addField('❯ Special Stratagems', stratagems.special.join(" "))
+        .addField('❯ Transmitter Objective Key','`trans`')
         .setTimestamp()
         .setFooter('Ellipsis');
 
@@ -376,4 +331,4 @@ setInterval(function() {
 }, 60 * 1000);
 
 // Log our bot in using the token
-client.login(process.env.SECRET);
+bot.login(process.env.SECRET);
