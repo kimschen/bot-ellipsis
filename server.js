@@ -1,79 +1,76 @@
-const express     = require('express');
-const app         = express();
-const keepAlive   = express();
-const fs          = require('fs');
-const Discord     = require('discord.js');
-const bot         = new Discord.Client();
-const keepalive   = require('express-glitch-keepalive');
-const flatten     = require('flat');
-const contentful  = require('contentful-management');
-const https       = require("https");
-const Helldivers  = require('./contents/helldivers.js');
+const EXPRESS         = require('express');
+const APP             = EXPRESS();
+const APP_KEEP_ALIVE  = EXPRESS();
+const KEEP_ALIVE      = require('express-glitch-keepalive');
+const FILE_SYSTEM     = require('fs');
+const DISCORD         = require('discord.js');
+const FLAT            = require('flat');
+const CONTENTFUL      = require('contentful-management');
+const HTTPS           = require("https");
+const BOT             = new DISCORD.Client();
 
 // Read & Parse json files
-let jsonMessage       = fs.readFileSync('message.json');
-let jsonCommand       = fs.readFileSync('command.json');
-let jsonEmbed         = fs.readFileSync('embed.json');
-let jsonEmbedField    = fs.readFileSync('embed_field.json');
-
+let jsonMessage       = FILE_SYSTEM.readFileSync('message.json');
+let jsonCommand       = FILE_SYSTEM.readFileSync('command.json');
+let jsonEmbed         = FILE_SYSTEM.readFileSync('embed.json');
+let jsonEmbedField    = FILE_SYSTEM.readFileSync('embed_field.json');
 let message           = JSON.parse(jsonMessage);
 let command           = JSON.parse(jsonCommand);
 let embedData         = JSON.parse(jsonEmbed);
 let embedFieldData    = JSON.parse(jsonEmbedField);
+let flattenCmd        = FLAT({command});
 
-let flattenCmd  = flatten({command});
+// Import Modules
+let Helldivers        = require('./contents/helldivers.js');
+let PortalKnights     = require('./contents/portalknights.js');
 
-keepAlive.use(keepalive);
+APP_KEEP_ALIVE.use(KEEP_ALIVE);
 
-app.use(express.static('public'));
+APP.use(EXPRESS.static('public'));
  
-app.get('/', (request, response) => {
+APP.get('/', (request, response) => {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get('/commands', (request, response) => {
+APP.get('/commands', (request, response) => {
   response.sendFile(__dirname + '/views/command.html');
 });
 
-app.get('/json', function(request, response) {
+APP.get('/json', function(request, response) {
   response.send(flattenCmd);
 });
 
-const listener = app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
+const LISTENER = APP.listen(process.env.PORT, function() {
+  console.log('Your app is listening on port ' + LISTENER.address().port);
 });
 
-const contentfulClient = contentful.createClient({
+const CLIENT_CONTENTFUL = CONTENTFUL.createClient({
   accessToken: process.env.CONTENTFUL_APIKEY
 })
 
-bot.on('ready', () => {
+BOT.on('ready', () => {
   
-    bot.user.setActivity('... help', {type: 'LISTENING'});
-    console.log(`Logged in as ${bot.user.tag}!`);  
+    BOT.user.setActivity('... help', {type: 'LISTENING'});
+    console.log(`Logged in as ${BOT.user.tag}!`);  
   
-    // const channel = bot.channels.find(ch => ch.name === 'ellipsis');
+    // const channel = BOT.channels.find(ch => ch.name === 'ellipsis');
 });
 
-var index = 0;
 
-bot.on('message', (receivedCommand) => {
+BOT.on('message', (receivedCommand) => {
   
+    
     // Prevent bot from responding to its own messages
-    if (receivedCommand.author == bot.user) {
+    if (receivedCommand.author == BOT.user) {
         return
     }
   
-    if (receivedCommand.content.startsWith("...")) {
-        processCommand(receivedCommand);
-    }
-  
-    if (receivedCommand.content.startsWith("... hd ")) {
+    if (receivedCommand.content.startsWith(command.prefix)) {
       
-      Helldivers.processImageCommand(fs, message, receivedCommand);
-    
+      processCommand(receivedCommand);
+      
     }
-  
+
     function processCommand(receivedCommand) {
         
         let fullCommand = receivedCommand.content.toLowerCase().substr(3) // Remove the leading prefix mark
@@ -81,89 +78,36 @@ bot.on('message', (receivedCommand) => {
         let primaryCommand = splitCommand[1]; // The first word after the prefix
         let secondaryCommand = splitCommand[2]; // The second word after the primary command
         let cmdArguments = splitCommand.slice(3).join(" "); // All other words are cmdArguments/parameters/options for the command
-
+      
         console.log(`Full Command: ${fullCommand}`);
         console.log(`Primary Command: ${primaryCommand}`);
         console.log(`Secondary Command: ${secondaryCommand}`);
         console.log(`Arguments: ${cmdArguments}`); // There may not be any cmdArguments
-                    
+             
+        // Portal Knights
         if (primaryCommand == command.cmd_portalknights) {
           if (secondaryCommand == command.portalknights.type.weapon) {
             if (cmdArguments == command.portalknights.class.warrior) {
 
-              var portalKnightsEmbed = embedData.portalknights.weapon.warrior;
-              var portalKnightsFields = embedFieldData.portalknights.weapon.warrior;
+              let portalKnightsEmbed = embedData.portalknights.weapon.warrior;
+              let portalKnightsFields = embedFieldData.portalknights.weapon.warrior;
               
-              // Add fields into embed json
-              portalKnightsEmbed.fields = portalKnightsFields.slice(0, 5);
-                                  
-              var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed)                  
-              console.log(portalKnightsEmbed.fields.length);
-
-              receivedCommand.channel.send({embed : embedDisplay}).then(embedMessage => {
-                embedMessage.react('➡️');
-                embedMessage.react('⬅️');
-
-                const filter = (reaction , user) => {
-                  return ['⬅️', '➡️'].includes(reaction.emoji.name) && user.id === receivedCommand.author.id;
-                };
-
-                const collector = embedMessage.createReactionCollector(filter, { time: 60000 * 5}); // 1 min
-
-                collector.on('collect', reaction => {
-
-                  // Next page button                        
-                  if (reaction.emoji.name == '➡️') {
-
-                    var indexList = portalKnightsFields.indexOf(portalKnightsEmbed.fields[4]);
-                    console.log(`index list ${indexList}`);
-
-                    portalKnightsEmbed.fields = portalKnightsFields.slice(indexList+1,indexList+6);
-
-//                         if (indexList > 19) {
-
-//                           console.log("index -1 true");
-//                           portalKnightsEmbed.fields = portalKnightsFields.slice(0,5);
-//                           var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
-//                           embedMessage.edit(embedDisplay)
-
-//                         } 
-
-                      var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
-                      embedMessage.edit(embedDisplay)
-
-
-                      console.log(`index of ${portalKnightsFields.indexOf(portalKnightsEmbed.fields[4])}`);
-                      console.log("end");
-                      
-                                            
-                  } else {
-                    
-                      var indexList = portalKnightsFields.indexOf(portalKnightsEmbed.fields[4]);
-                      console.log(`index list ${indexList}`);
-                                        
-                      portalKnightsEmbed.fields = portalKnightsFields.slice(indexList-9,indexList-4);
-                                        
-                      if (indexList == -1) {
-
-                        console.log("index -1 true");
-                        portalKnightsEmbed.fields = portalKnightsFields.slice(0,5);
-                        var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
-                        embedMessage.edit(embedDisplay)
-
-                      } 
-                    
-                      var embedDisplay = new Discord.RichEmbed(portalKnightsEmbed);
-                      embedMessage.edit(embedDisplay)
-                    
-                  }
-                })                
-              })
-              .catch(err => console.error(err));
+              PortalKnights.cntPortalKnights(receivedCommand, DISCORD, portalKnightsEmbed, portalKnightsFields);
 
             }
           }
         }
+      
+      // Helldivers
+      if (primaryCommand == command.cmd_helldivers) {
+        Helldivers.cntHelldivers(receivedCommand, FILE_SYSTEM, message);
+      }
+      
+      if (primaryCommand == command.cmd_helldivers) {
+        if (secondaryCommand == null) {
+          Helldivers.cntEmbedCommand(receivedCommand, DISCORD, command);
+        }
+      }
 
     }
 });
@@ -174,91 +118,32 @@ bot.on('message', (receivedCommand) => {
 |-----------------------------------------------------------------------------
 */
 
-bot.on('message', msg => {
+BOT.on('message', msg => {
         
     // Prevent bot from responding to its own messages
-    if (msg.author == bot.user) {
+    if (msg.author == BOT.user) {
         return
     }
 
-    var msgContent  = msg.content.toLowerCase();
-    var prefix = "... ";
-    var commandList = [];
-    var cmd = '';
+    let msgContent  = msg.content.toLowerCase();
   
-    if (msgContent == prefix+command.help) {
+    if (msgContent == command.prefix+command.help) {
         
-        const helpCommandEmbed = new Discord.RichEmbed()
+        const helpCommandEmbed = new DISCORD.RichEmbed()
         .setColor('#fbb3ff')
         .setAuthor("Hi, I'm Ellipsis, which game content you're looking for?")
         .setDescription('Command Prefix : `...`')
         .addField('❯ HELLDIVERS™', '`hd`', true)
-        .addField('❯ Portal Knights Wiki', '`pk`', true)
+        .addField('❯ Portal Knights', '`pk`', true)
         .setTimestamp()
         .setFooter('Ellipsis');
 
         msg.channel.send(helpCommandEmbed);
     }
 
-
-/*
-|-----------------------------------------------------------------------------
-| Helldivers Command List
-|-----------------------------------------------------------------------------
-*/
-
-    if (msgContent === prefix+command.cmd_helldivers) {
-        
-        var stratagems = {
-          "offensive" : [],
-          "defensive" : [],
-          "supply"    : [],
-          "weapon"    : [],
-          "special"   : []
-        };
-      
-        // var offensive   = [];
-        // var defensive   = [];
-        // var supply      = [];
-        // var weapon      = [];
-        // var special     = [];
-      
-        for (cmd in command.helldivers.offensive) {
-          stratagems.offensive.push("`"+command.helldivers.offensive[cmd]+"` | ");
-        }
-        for (cmd in command.helldivers.defensive) {
-          stratagems.defensive.push("`"+command.helldivers.defensive[cmd]+"` | ");
-        }
-        for (cmd in command.helldivers.supply) {
-          stratagems.supply.push("`"+command.helldivers.supply[cmd]+"` | ");
-        }
-        for (cmd in command.helldivers.weapon) {
-          stratagems.weapon.push("`"+command.helldivers.weapon[cmd]+"` | ");
-        }
-        for (cmd in command.helldivers.special) {
-          stratagems.special.push("`"+command.helldivers.special[cmd]+"` | ");
-        }
-      
-        const helldiversEmbed = new Discord.RichEmbed()
-        .setColor('#d4d4d4')
-        .setAuthor('HELLDIVERS™', 'https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/','https://helldivers.gamepedia.com/Stratagems')
-        .setDescription('Command Prefix : `... hd`')
-        .setThumbnail('https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/')
-        .addField('❯ Offensive Stratagems', stratagems.offensive.join(" "))
-        .addField('❯ Defensive Stratagems', stratagems.defensive.join(" "))
-        .addField('❯ Supply Stratagems', stratagems.supply.join(" "))
-        .addField('❯ Weapons', stratagems.weapon.join(" "))
-        .addField('❯ Special Stratagems', stratagems.special.join(" "))
-        .addField('❯ Transmitter Objective Key','`trans`')
-        .setTimestamp()
-        .setFooter('Ellipsis');
-
-        msg.channel.send(helldiversEmbed);
-    }
-
     // Transmitter objective steps
     switch(msgContent) {
-        case prefix+command.helldivers.trans : msg.channel.send(message.objective.trans_1 + 
+        case command.prefix+command.helldivers.trans : msg.channel.send(message.objective.trans_1 + 
                                                                 message.objective.trans_2 + 
                                                                 message.objective.trans_3 + 
                                                                 message.objective.trans_4);
@@ -271,9 +156,9 @@ bot.on('message', msg => {
 |-----------------------------------------------------------------------------
 */
     
-    if (msgContent === prefix+command.cmd_portalknights) {
+    if (msgContent === command.prefix+command.cmd_portalknights) {
         
-        const helpCommandEmbed = new Discord.RichEmbed()
+        const helpCommandEmbed = new DISCORD.RichEmbed()
         .setColor('#6583fc')
         .attachFile('img_misc/portal_knights.png')
         .setAuthor("Portal Knights")
@@ -325,10 +210,10 @@ bot.on('message', msg => {
 
 // Prevent from idling, send request to url every 1 minutes
 setInterval(function() {
-    https.get(process.env.LIVE_APP_URL);
+    HTTPS.get(process.env.LIVE_APP_URL);
     console.log("ping!");
 
 }, 60 * 1000);
 
 // Log our bot in using the token
-bot.login(process.env.SECRET);
+BOT.login(process.env.SECRET);

@@ -1,10 +1,20 @@
 {
+  "helldivers" : {
+    "help" : {
+      "author" : { "name" : "HELLDIVERS™" },
+      "description" : "Source [Helldivers](https://helldivers.gamepedia.com/Helldivers_Wiki) \nPrefix `... hd`",
+      "color" : "#d4d4d4",
+      "thumbnail" : "https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/",
+      "footer" : "Ellipsis"
+    }
+  },
   "portalknights" : {
     "weapon" : {
       "warrior" : {
         "author" : { "name" : "Portal Knights" },
         "description" : "Official [Portal Knights](https://portalknights.com/en/) | Source [Fandom Wiki](https://portalknights.gamepedia.com/Portal_Knights_Wiki) \nDesc `... pk {type} {class} {id}`\nType `weapon` | `armor` \n Class `warrior` | `ranger` | `rogue` | `mage`",
-        "color": 8990890 
+        "color": 8990890,
+        "footer" : "Ellipsis"
       }
     }
   }    
