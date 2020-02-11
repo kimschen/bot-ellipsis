@@ -1,4 +1,5 @@
 {
+    "prefix" : "...",
     "help" : "help",
     "cmd_helldivers" : "hd",
     "cmd_portalknights" : "pk",

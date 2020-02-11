@@ -1,4 +1,4 @@
-module.exports.processImageCommand = function (fs, message, receivedCommand) {
+module.exports.cntHelldivers = function (receivedCommand, fs, message) {
 
   let content = receivedCommand.content.toLowerCase().substr(7);  
   let hdWeaponImagePath  = "/app/img_weapon/"+content+".png";
@@ -35,4 +35,48 @@ module.exports.processImageCommand = function (fs, message, receivedCommand) {
     }
 
   }
+}
+
+module.exports.cntEmbedCommand = function (receivedCommand, DISCORD, command) {
+
+      let cmd = '';
+      let stratagems = {
+        "offensive" : [],
+        "defensive" : [],
+        "supply"    : [],
+        "weapon"    : [],
+        "special"   : []
+      };
+
+      for (cmd in command.helldivers.offensive) {
+        stratagems.offensive.push("`"+command.helldivers.offensive[cmd]+"` | ");
+      }
+      for (cmd in command.helldivers.defensive) {
+        stratagems.defensive.push("`"+command.helldivers.defensive[cmd]+"` | ");
+      }
+      for (cmd in command.helldivers.supply) {
+        stratagems.supply.push("`"+command.helldivers.supply[cmd]+"` | ");
+      }
+      for (cmd in command.helldivers.weapon) {
+        stratagems.weapon.push("`"+command.helldivers.weapon[cmd]+"` | ");
+      }
+      for (cmd in command.helldivers.special) {
+        stratagems.special.push("`"+command.helldivers.special[cmd]+"` | ");
+      }
+
+      const helldiversEmbed = new DISCORD.RichEmbed()
+      .setColor('#d4d4d4')
+      .setAuthor('HELLDIVERS™', 'https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/','https://helldivers.gamepedia.com/Stratagems')
+      .setDescription('Command Prefix : `... hd`')
+      .setThumbnail('https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/')
+      .addField('❯ Offensive Stratagems', stratagems.offensive.join(" "))
+      .addField('❯ Defensive Stratagems', stratagems.defensive.join(" "))
+      .addField('❯ Supply Stratagems', stratagems.supply.join(" "))
+      .addField('❯ Weapons', stratagems.weapon.join(" "))
+      .addField('❯ Special Stratagems', stratagems.special.join(" "))
+      .addField('❯ Transmitter Objective Key','`trans`')
+      .setTimestamp()
+      .setFooter('Ellipsis');
+
+      receivedCommand.channel.send(helldiversEmbed);
 }
