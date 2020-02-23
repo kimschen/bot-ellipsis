@@ -3,7 +3,6 @@ const app             = Express();
 const app_keep_alive  = Express();
 const keep_alive      = require('express-glitch-keepalive');
 const https           = require("https");
-const fs              = require('fs');
 const Discord         = require('discord.js');
 const bot             = new Discord.Client();
 const flat            = require('flat');
@@ -14,8 +13,7 @@ const command         = require("./command.json");
 const message         = require("./message.json");
 const embedData       = require("./embed.json");
 const embedFieldData  = require("./embed_fields/portalknights.json");
-
-let flattenCmd        = flat({command});
+const flattenCmd      = flat({command});
 
 // Import Modules
 let Helldivers        = require('./modules/helldivers.js');
@@ -98,7 +96,7 @@ bot.on('message', (receivedCommand) => {
       
       // Helldivers
       if (primaryCommand == command.cmd_helldivers) {
-        Helldivers.cntHelldivers(receivedCommand, fs, message);
+        Helldivers.cntHelldivers(receivedCommand, message);
       }
       
       if (primaryCommand == command.cmd_helldivers) {

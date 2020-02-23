@@ -7,8 +7,10 @@
 */
 
 const Discord = require('discord.js');
+const fs      = require('fs');
 
-module.exports.cntHelldivers = function (receivedCommand, fs, message) {
+
+module.exports.cntHelldivers = function (receivedCommand, message) {
 
   let content = receivedCommand.content.toLowerCase().substr(7);  
   let hdWeaponImagePath  = "/app/img_weapon/"+content+".png";
