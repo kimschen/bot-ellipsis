@@ -1,8 +1,22 @@
-module.exports.cntPortalKnights = function (receivedCommand, DISCORD, embed, embedFields) {
+'use strict'
 
-  // Add fields into embed json
+/*
+|------------------------------------------------------------------------------------
+| This module is exporting function as a class to display game contents in RichEmbed
+|------------------------------------------------------------------------------------
+*/
+
+const DISCORD = require('discord.js');
+
+module.exports.CNT_PortalKnights = function (receivedCommand, embed) {
+
+  // Declare a let variable to store all embed fields data
+  let embedFields = embed.fields;
+  
+  // Set the embed fields data from 0 - 5
   embed.fields = embedFields.slice(0, 5);
 
+  // Create an embed object with embed data
   let embedDisplay = new DISCORD.RichEmbed(embed)                  
 
   receivedCommand.channel.send({embed : embedDisplay}).then(embedMessage => {
@@ -19,39 +33,29 @@ module.exports.cntPortalKnights = function (receivedCommand, DISCORD, embed, emb
 
       // Next page button                        
       if (reaction.emoji.name == '➡️') {
-
+        
         let indexList = embedFields.indexOf(embed.fields[4]);
-        console.log(`index list ${indexList}`);
-
         embed.fields = embedFields.slice(indexList+1,indexList+6);
 
-//                         if (indexList > 19) {
+        if (indexList == -1) {
 
-//                           console.log("index -1 true");
-//                           embed.fields = embedFields.slice(0,5);
-//                           let embedDisplay = new DISCORD.RichEmbed(embed);
-//                           embedMessage.edit(embedDisplay)
-
-//                         } 
-
+          embed.fields = embedFields.slice(0,5);
           let embedDisplay = new DISCORD.RichEmbed(embed);
           embedMessage.edit(embedDisplay)
 
+        } 
 
-          console.log(`index of ${embedFields.indexOf(embed.fields[4])}`);
-          console.log("end");
+        let embedDisplay = new DISCORD.RichEmbed(embed);
+        embedMessage.edit(embedDisplay)
 
 
       } else {
 
           let indexList = embedFields.indexOf(embed.fields[4]);
-          console.log(`index list ${indexList}`);
-
           embed.fields = embedFields.slice(indexList-9,indexList-4);
 
-          if (indexList == -1) {
+          if (indexList <= 4) {
 
-            console.log("index -1 true");
             embed.fields = embedFields.slice(0,5);
             let embedDisplay = new DISCORD.RichEmbed(embed);
             embedMessage.edit(embedDisplay)

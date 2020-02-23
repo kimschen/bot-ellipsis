@@ -1,3 +1,13 @@
+'use strict'
+/*
+|------------------------------------------------------------------------
+| This module is exporting function to display game contents by matching
+| the command 'args' with the image path 'name' and display accordingly
+|------------------------------------------------------------------------
+*/
+
+const Discord = require('discord.js');
+
 module.exports.cntHelldivers = function (receivedCommand, fs, message) {
 
   let content = receivedCommand.content.toLowerCase().substr(7);  
@@ -37,7 +47,7 @@ module.exports.cntHelldivers = function (receivedCommand, fs, message) {
   }
 }
 
-module.exports.cntEmbedCommand = function (receivedCommand, DISCORD, command) {
+module.exports.cntEmbedCommand = function (receivedCommand, command, embed) {
 
       let cmd = '';
       let stratagems = {
@@ -64,10 +74,8 @@ module.exports.cntEmbedCommand = function (receivedCommand, DISCORD, command) {
         stratagems.special.push("`"+command.helldivers.special[cmd]+"` | ");
       }
 
-      const helldiversEmbed = new DISCORD.RichEmbed()
-      .setColor('#d4d4d4')
-      .setAuthor('HELLDIVERS™', 'https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/','https://helldivers.gamepedia.com/Stratagems')
-      .setDescription('Command Prefix : `... hd`')
+      let helldiversEmbed = new Discord.RichEmbed(embed)
+      // .setAuthor('HELLDIVERS™', 'https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/','https://helldivers.gamepedia.com/Stratagems')
       .setThumbnail('https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/')
       .addField('❯ Offensive Stratagems', stratagems.offensive.join(" "))
       .addField('❯ Defensive Stratagems', stratagems.defensive.join(" "))
