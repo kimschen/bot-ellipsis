@@ -1,55 +1,63 @@
 'use strict'
 /*
-|------------------------------------------------------------------------
-| This module is exporting function to display game contents by matching
+|-----------------------------------------------------------------------------
+| This module is exporting function to display game secondaryCmds by matching
 | the command 'args' with the image path 'name' and display accordingly
-|------------------------------------------------------------------------
+|-----------------------------------------------------------------------------
 */
 
-const Discord = require('discord.js');
-const fs      = require('fs');
+const Discord   = require('discord.js');
+const fs        = require('fs');
+const info      = require("../info/helldivers.json");
+const command   = require("../command.json");
+const embedData = require("../embed.json");
 
+module.exports.run = async (message, secondaryCmd) => {
 
-module.exports.cntHelldivers = function (receivedCommand, message) {
+  let hdWeaponImagePath  = "/app/img_weapon/"+secondaryCmd+".png";
+  let hdDefensiveImagePath = "/app/img_stratagem/defensive/"+secondaryCmd+".png";
+  let hdOffensiveImagePath = "/app/img_stratagem/offensive/"+secondaryCmd+".png";
+  let hdSpecialImagePath = "/app/img_stratagem/special/"+secondaryCmd+".png";
+  let hdSupplyImagePath = "/app/img_stratagem/supply/"+secondaryCmd+".png";
 
-  let content = receivedCommand.content.toLowerCase().substr(7);  
-  let hdWeaponImagePath  = "/app/img_weapon/"+content+".png";
-  let hdDefensiveImagePath = "/app/img_stratagem/defensive/"+content+".png";
-  let hdOffensiveImagePath = "/app/img_stratagem/offensive/"+content+".png";
-  let hdSpecialImagePath = "/app/img_stratagem/special/"+content+".png";
-  let hdSupplyImagePath = "/app/img_stratagem/supply/"+content+".png";
-
-  if (content) {
+  if (secondaryCmd) {
 
     // HD Weapon Image
     if (fs.existsSync(hdWeaponImagePath)) {
-      receivedCommand.channel.send(message.helldivers.weapon[content], {files: [hdWeaponImagePath]});
+      message.channel.send(info.weapon[secondaryCmd], {files: [hdWeaponImagePath]});
     }
 
     // HD Defensive Stratagem Image
     if (fs.existsSync(hdDefensiveImagePath)) {
-      receivedCommand.channel.send(message.helldivers.defensive[content], {files: [hdDefensiveImagePath]});
+      message.channel.send(info.defensive[secondaryCmd], {files: [hdDefensiveImagePath]});
     }
 
     // HD Offensive Stratagem Image
     if (fs.existsSync(hdOffensiveImagePath)) {
-      receivedCommand.channel.send(message.helldivers.offensive[content], {files: [hdOffensiveImagePath]});
+      message.channel.send(info.offensive[secondaryCmd], {files: [hdOffensiveImagePath]});
     }
 
     // HD Special Stratagem Image
     if (fs.existsSync(hdSpecialImagePath)) {
-      receivedCommand.channel.send(message.helldivers.special[content], {files: [hdSpecialImagePath]});
+      message.channel.send(info.special[secondaryCmd], {files: [hdSpecialImagePath]});
     }
 
     // HD Supply Stratagem Image
     if (fs.existsSync(hdSupplyImagePath)) {
-      receivedCommand.channel.send(message.helldivers.supply[content], {files: [hdSupplyImagePath]});
+      message.channel.send(info.supply[secondaryCmd], {files: [hdSupplyImagePath]});
     }
 
   }
+  
+  // Transmitter objective steps
+  if (secondaryCmd === command.helldivers.trans) {
+     message.channel.send(info.objective.trans_1 + info.objective.trans_2 + info.objective.trans_3 + info.objective.trans_4);
+  }
+  
+
 }
 
-module.exports.cntEmbedCommand = function (receivedCommand, command, embed) {
+module.exports.list = async (message) => {
 
       let cmd = '';
       let stratagems = {
@@ -76,7 +84,7 @@ module.exports.cntEmbedCommand = function (receivedCommand, command, embed) {
         stratagems.special.push("`"+command.helldivers.special[cmd]+"` | ");
       }
 
-      let helldiversEmbed = new Discord.RichEmbed(embed)
+      let helldiversEmbed = new Discord.RichEmbed(embedData)
       // .setAuthor('HELLDIVERS™', 'https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/','https://helldivers.gamepedia.com/Stratagems')
       .setThumbnail('https://steamuserimages-a.akamaihd.net/ugc/88224496145598035/E12BE9A061F526B4898A69E81B26D19148525FC3/')
       .addField('❯ Offensive Stratagems', stratagems.offensive.join(" "))
@@ -88,5 +96,5 @@ module.exports.cntEmbedCommand = function (receivedCommand, command, embed) {
       .setTimestamp()
       .setFooter('Ellipsis');
 
-      receivedCommand.channel.send(helldiversEmbed);
+      message.channel.send(helldiversEmbed);
 }

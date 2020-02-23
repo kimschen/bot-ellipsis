@@ -102,19 +102,7 @@
           "sniffer" : "sniffer"
       },
     
-      "trans" : "hd trans"
-    },
-    "portalknights" : {
-      "class" : {
-        "warrior" : "warrior",
-        "ranger" : "ranger",
-        "mage" : "mage",
-        "rogue" : "rogue"
-      },
-      "type" : {
-        "weapon" : "weapon",
-        "armor" : "armor"
-      }
+      "trans" : "trans"
     }
     
   
