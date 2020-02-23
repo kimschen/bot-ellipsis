@@ -1,67 +1,64 @@
-const EXPRESS         = require('express');
-const APP             = EXPRESS();
-const APP_KEEP_ALIVE  = EXPRESS();
-const KEEP_ALIVE      = require('express-glitch-keepalive');
-const FILE_SYSTEM     = require('fs');
-const DISCORD         = require('discord.js');
-const FLAT            = require('flat');
-const CONTENTFUL      = require('contentful-management');
-const HTTPS           = require("https");
-const BOT             = new DISCORD.Client();
+const Express         = require('express');
+const app             = Express();
+const app_keep_alive  = Express();
+const keep_alive      = require('express-glitch-keepalive');
+const https           = require("https");
+const fs              = require('fs');
+const Discord         = require('discord.js');
+const bot             = new Discord.Client();
+const flat            = require('flat');
+const Contentful      = require('contentful-management');
 
-// Read & Parse json files
-let jsonMessage       = FILE_SYSTEM.readFileSync('message.json');
-let jsonCommand       = FILE_SYSTEM.readFileSync('command.json');
-let jsonEmbed         = FILE_SYSTEM.readFileSync('embed.json');
-let jsonEmbedField    = FILE_SYSTEM.readFileSync('embed_field.json');
-let message           = JSON.parse(jsonMessage);
-let command           = JSON.parse(jsonCommand);
-let embedData         = JSON.parse(jsonEmbed);
-let embedFieldData    = JSON.parse(jsonEmbedField);
-let flattenCmd        = FLAT({command});
+// json files
+const command         = require("./command.json");
+const message         = require("./message.json");
+const embedData       = require("./embed.json");
+const embedFieldData  = require("./embed_fields/portalknights.json");
+
+let flattenCmd        = flat({command});
 
 // Import Modules
-let Helldivers        = require('./contents/helldivers.js');
-let PortalKnights     = require('./contents/portalknights.js');
+let Helldivers        = require('./modules/helldivers.js');
+let PortalKnights     = require('./modules/portalknights.js');
 
-APP_KEEP_ALIVE.use(KEEP_ALIVE);
+app_keep_alive.use(keep_alive);
 
-APP.use(EXPRESS.static('public'));
+app.use(Express.static('public'));
  
-APP.get('/', (request, response) => {
+app.get('/', (request, response) => {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-APP.get('/commands', (request, response) => {
+app.get('/commands', (request, response) => {
   response.sendFile(__dirname + '/views/command.html');
 });
 
-APP.get('/json', function(request, response) {
+app.get('/json', function(request, response) {
   response.send(flattenCmd);
 });
 
-const LISTENER = APP.listen(process.env.PORT, function() {
+const LISTENER = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + LISTENER.address().port);
 });
 
-const CLIENT_CONTENTFUL = CONTENTFUL.createClient({
+const client_contentful = Contentful.createClient({
   accessToken: process.env.CONTENTFUL_APIKEY
 })
 
-BOT.on('ready', () => {
+bot.on('ready', () => {
   
-    BOT.user.setActivity('... help', {type: 'LISTENING'});
-    console.log(`Logged in as ${BOT.user.tag}!`);  
+    bot.user.setActivity('... help', {type: 'LISTENING'});
+    console.log(`Logged in as ${bot.user.tag}!`);  
   
-    // const channel = BOT.channels.find(ch => ch.name === 'ellipsis');
+    // const channel = bot.channels.find(ch => ch.name === 'ellipsis');
 });
 
 
-BOT.on('message', (receivedCommand) => {
+bot.on('message', (receivedCommand) => {
   
     
     // Prevent bot from responding to its own messages
-    if (receivedCommand.author == BOT.user) {
+    if (receivedCommand.author == bot.user) {
         return
     }
   
@@ -90,9 +87,10 @@ BOT.on('message', (receivedCommand) => {
             if (cmdArguments == command.portalknights.class.warrior) {
 
               let portalKnightsEmbed = embedData.portalknights.weapon.warrior;
-              let portalKnightsFields = embedFieldData.portalknights.weapon.warrior;
+              // let portalKnightsFields = embedFieldData.weapon.warrior;
+              portalKnightsEmbed.fields = embedFieldData.weapon.warrior;
               
-              PortalKnights.cntPortalKnights(receivedCommand, DISCORD, portalKnightsEmbed, portalKnightsFields);
+              PortalKnights.CNT_PortalKnights(receivedCommand, portalKnightsEmbed);
 
             }
           }
@@ -100,12 +98,16 @@ BOT.on('message', (receivedCommand) => {
       
       // Helldivers
       if (primaryCommand == command.cmd_helldivers) {
-        Helldivers.cntHelldivers(receivedCommand, FILE_SYSTEM, message);
+        Helldivers.cntHelldivers(receivedCommand, fs, message);
       }
       
       if (primaryCommand == command.cmd_helldivers) {
         if (secondaryCommand == null) {
-          Helldivers.cntEmbedCommand(receivedCommand, DISCORD, command);
+          
+          let helldiversEmbed = embedData.helldivers.help;
+
+          Helldivers.cntEmbedCommand(receivedCommand, command, helldiversEmbed);
+          
         }
       }
 
@@ -118,10 +120,10 @@ BOT.on('message', (receivedCommand) => {
 |-----------------------------------------------------------------------------
 */
 
-BOT.on('message', msg => {
+bot.on('message', msg => {
         
     // Prevent bot from responding to its own messages
-    if (msg.author == BOT.user) {
+    if (msg.author == bot.user) {
         return
     }
 
@@ -129,7 +131,7 @@ BOT.on('message', msg => {
   
     if (msgContent == command.prefix+command.help) {
         
-        const helpCommandEmbed = new DISCORD.RichEmbed()
+        const helpCommandEmbed = new Discord.RichEmbed()
         .setColor('#fbb3ff')
         .setAuthor("Hi, I'm Ellipsis, which game content you're looking for?")
         .setDescription('Command Prefix : `...`')
@@ -158,7 +160,7 @@ BOT.on('message', msg => {
     
     if (msgContent === command.prefix+command.cmd_portalknights) {
         
-        const helpCommandEmbed = new DISCORD.RichEmbed()
+        const helpCommandEmbed = new Discord.RichEmbed()
         .setColor('#6583fc')
         .attachFile('img_misc/portal_knights.png')
         .setAuthor("Portal Knights")
@@ -210,10 +212,10 @@ BOT.on('message', msg => {
 
 // Prevent from idling, send request to url every 1 minutes
 setInterval(function() {
-    HTTPS.get(process.env.LIVE_APP_URL);
+    https.get(process.env.LIVE_APP_URL);
     console.log("ping!");
 
 }, 60 * 1000);
 
 // Log our bot in using the token
-BOT.login(process.env.SECRET);
+bot.login(process.env.SECRET);
