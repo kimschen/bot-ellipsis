@@ -17,6 +17,6 @@
     "discord.js": "^11.5.1",
     "express": "^4.17.1",
     "express-glitch-keepalive": "^0.2.0",
-    "flat": "^5.0.0"
+    "flat": "^5.0.1"
   }
 }
